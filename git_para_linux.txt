@@ -27,10 +27,13 @@ una vez esté todo inciializado, los pasos a seguir cada vez que quiera hacer un
 	-git commit -m "comentario obligatorio"
 	-git push origin master
 
+__________________________________________________________
+
 	-clonar repo-
-nos crea una carpeta ya con el nombre del repo, asi q si queremos clonar "algo" no hacemos una carpeta "algo" y clonamos dentro, xq aparecerá algo/algo.
+
+nos crea una carpeta ya con el nombre del repo, asi q si queremos clonar "algo" no creamos una carpeta "algo" y clonamos dentro, xq aparecerá algo/algo.
 git init
-git clone https://github.com/gutic/pizasistem
+git clone https://github.com/gutic/pizasystem
 cd /algo
 git pull origin master| actualizo el repo con el commit mas reciente
 
