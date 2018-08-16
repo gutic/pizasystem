@@ -1,0 +1,15 @@
+importar el fichero "base de datos sesiones.sql a una bd usando phpmyadmin
+se logea con el user test, contraseña test.
+configurar la bd
+	-> ir a carpeta config
+	-> editar config.php segun los comentarios
+funcionamiento.
+	desde main.php(o archivo de abm, o busquedas etc) llamamos a las funciones .js que estan 		en la carpeta js a traves de la inclusion del archivo head.php (que se incluye en todas las paginas) que se encuentra en la carpeta views.
+	las funciones q se encuentran en main.js llaman al archivo cl_abm.php que se encuentra en /php/cl_abm.php
+	una vez aprobado el login reedirecciona a main.php
+
+	funcionamiento basico:
+	html -> js -> solicitud ->      php
+		<-			<-  respuesta         <-
+arreglar compra_producto
+abm recetas.

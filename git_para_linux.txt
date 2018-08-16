@@ -1,0 +1,58 @@
+	-Inicializar repo en linux-
+
+git config --global user.name"user" |  simplemente nombre.
+git config --global user.email "user@gmail.com" | mail del usr.
+git init | inicializo un repo en la ubicacion donde esté.
+git add . | añade todos los archivos al  .init del repositorio -> 	añadir siempre que se crean nuevos archivos.
+git commit -m "comentario obligatorio" | hago el commit.
+
+_____________________________________________________
+creo previamente el repositorio https://github.com/gutic/pizasistem en la pagina git.com
+____________________________________________________
+
+
+git remote add origin https://github.com/gutic/pizasistem.git
+
+
+__________________________________________________________
+nose que hace pero es necesario hacer el upstream
+__________________________________________________________
+
+git remote add upstream https://github.com/gutic/pizasistem.git
+git push origin master | hago push
+
+__________________________________________________________
+una vez esté todo inciializado, los pasos a seguir cada vez que quiera hacer un push :
+	-"git add ." o "git add nombre_del_archivo"
+	-git commit -m "comentario obligatorio"
+	-git push origin master
+
+	-clonar repo-
+nos crea una carpeta ya con el nombre del repo, asi q si queremos clonar "algo" no hacemos una carpeta "algo" y clonamos dentro, xq aparecerá algo/algo.
+git init
+git clone https://github.com/gutic/pizasistem
+cd /algo
+git pull origin master| actualizo el repo con el commit mas reciente
+
+_________________________________________________________
+
+		-Para borrar archivos-
+git rm archivo1.txt
+
+Para borrar directorios (y sus contenidos):
+git rm -r midirectorio
+_________________________________________________________
+
+		-ramas-
+Para no trabajar en el master y no hacer cagadas se hace una rama para verificar previamente antes de hacer el push al master
+
+	Crea una nueva rama llamada "nueva_rama" y cámbiate a ella 		usando:
+		git checkout -b  nueva_rama
+	volver a la rama principal
+		git checkout master
+	y borra la rama
+		git branch -d nueva_rama
+
+Una rama nueva no estará disponible para los demás a menos que subas (push) la rama a tu repositorio remoto
+	git push origin <branch>
+_________________________________________________________
