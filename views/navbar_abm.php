@@ -48,15 +48,33 @@
 			<!-- Sidebar -->
 			<div id="sidebar-wrapper">
 					<ul class="sidebar-nav">
-							<li class="sidebar-brand">
-                <a href="main.php">
-                  Inicio
-                </a>
-							</li>
-							<li>
-								<a href="abm.php">____ABM____ </a>
-							</li>
-					</ul>
+						<li class="sidebar-brand">
+								<a href="main.php">
+									Inicio
+								</a>
+						</li>
+						<li>
+								<a href="venta_factura.php">Venta</a>
+						</li>
+						<li>
+							<a href="factura.php">Facturas emitidas</a>
+						</li>
+						<li>
+							<a href="abm.php">____ABM____ </a>
+						</li>
+						<li>
+								<a href="compra_insumo.php">Compras Insumo</a>
+						</li>
+						<li>
+								<a href="compra_producto.php">Compras Producto</a>
+						</li>
+						<li>
+								<a href="caja.php">Extracción/retiro </a>
+						</li>
+						<li>
+							<a href="cierreCaja.php">Movimientos</a>
+						</li>
+				</ul>
 			</div>
 			<!-- /#sidebar-wrapper -->
 
