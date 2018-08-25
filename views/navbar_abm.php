@@ -8,9 +8,9 @@
 <?php
 	error_reporting(E_ERROR);
 	include_once('views/head.php');
-	include_once('css')
+	include_once('css');
 ?>
-<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<!-- <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"> -->
 <link href="css/simple-sidebar.css" rel="stylesheet">
 <script type="text/javascript" src="js/altas_bajas.js"></script>
 <div class="navbar navbar-default navbar-fixed-top" style="background:black" rol="navigation">
@@ -34,8 +34,8 @@
 	</li>
   <ul class="navbar-right">
     <li><a href="#inicio"> Al menu </a></li>
-  </li>
-</ul>
+  	</li>
+	</ul>
 </div>
 <!DOCTYPE html>
 <html>
@@ -47,7 +47,17 @@
 	<div id="wrapper">
 			<!-- Sidebar -->
 			<div id="sidebar-wrapper">
-					<ul class="sidebar-nav">
+								<ul class="sidebar-nav">
+						<li class="sidebar-brand">
+							<a href="main.php">
+								Inicio
+							</a>
+						</li>
+						<li>
+							<a href="abm.php">____ABM____ </a>
+						</li>
+				</ul>
+					<!-- <ul class="sidebar-nav">
 						<li class="sidebar-brand">
 								<a href="main.php">
 									Inicio
@@ -73,7 +83,7 @@
 						</li>
 						<li>
 							<a href="cierreCaja.php">Movimientos</a>
-						</li>
+						</li> -->
 				</ul>
 			</div>
 			<!-- /#sidebar-wrapper -->
@@ -95,9 +105,9 @@
 	</div>
 	<!-- /#wrapper -->
 	<!-- Bootstrap core JavaScript -->
-	<script src="vendor/jquery/jquery.min.js"></script>
+	<!-- <script src="vendor/jquery/jquery.min.js"></script>
 	<script src="vendor/popper/popper.min.js"></script>
-	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+	<script src="vendor/bootstrap/js/bootstrap.min.js"></script> -->
 	<!-- Menu Toggle Script -->
 	<script>
 	$("#menu-toggle").click(function(e) {

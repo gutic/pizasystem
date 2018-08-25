@@ -8,9 +8,9 @@
 <?php
 	error_reporting(E_ERROR);
 	include_once('views/head.php');
-	include_once('css')
+	include_once('css');
 ?>
-<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<!-- <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"> -->
 <link href="css/simple-sidebar.css" rel="stylesheet">
 <div class="navbar navbar-inverse navbar-fixed-top" rol="navigation">
 		<div class="navbar-collapse collapse">
@@ -64,7 +64,7 @@
 									<a href="caja.php">Extracción/retiro </a>
 							</li>
 							<li>
-								<a href="cierreCaja.php">Movimientos</a>
+								<a href="movimientos.php">Movimientos</a>
 							</li>
 					</ul>
 			</div>
@@ -84,10 +84,6 @@
 
 	</div>
 	<!-- /#wrapper -->
-	<!-- Bootstrap core JavaScript -->
-	<script src="vendor/jquery/jquery.min.js"></script>
-	<script src="vendor/popper/popper.min.js"></script>
-	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
 	<!-- Menu Toggle Script -->
 	<script>
 	$("#menu-toggle").click(function(e) {
