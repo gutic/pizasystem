@@ -12,7 +12,7 @@ include_once('views/navbar.php');
             <fieldset>
               <legend>Ingreso / Egreso</legend>
               Cantidad $
-              <input type="text" id="dinero" name="dinero" >
+              <input type="number" id="dinero" name="dinero" >
               <br>
               <br>
               Observación:
@@ -28,10 +28,6 @@ include_once('views/navbar.php');
                 <tr>
                   <td><b>fecha:</b></td>
                   <td><input type="date" id="fecha" name="fecha" value="<?php echo date("Y-m-d");?>"></td>
-                </tr>
-                <tr>
-                  <td><b>Persona Que realiza la operacion:</b></td>
-                  <td><input type="text" name="persona" id="persona" ></td>
                 </tr>
                 <tr>
                   <td><b>Direccion de extracción/ingreso: </b></td>

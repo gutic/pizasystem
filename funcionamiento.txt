@@ -13,3 +13,16 @@ funcionamiento.
 		<-			<-  respuesta         <-
 arreglar compra_producto
 abm recetas.
+______________________________________________
+27/08/18
+agregar (Operador X realizó el movimiento)
+
+agregar fecha cumpleaños en persona.
+
+Tipo Operacion:
+Factura venta = 1
+Factura compra = 2
+extaccion = 3
+ingreso = 4
+
+

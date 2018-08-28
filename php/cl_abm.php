@@ -265,24 +265,20 @@
         break;
 
       case 'ingreso_dinero':
+        session_start();
         $dinero = $_POST['dinero'];
         $observacion = $_POST['observacion'];
         $fecha = $_POST['fecha'];
         $ff= explode("/",$fecha);
-        $persona = $_POST['persona'];
         $dir = $_POST['dir'];
         $formapago = $_POST['formapago'];
+        $usuario = $_SESSION['Id'];
         $num_factura = ulti_factura(4);
-        $result = mysqli_query($conexion,"SELECT * FROM Persona WHERE Nombre ='$persona';");
-        if($reg_cli = mysqli_fetch_array($result)){
-          mysqli_query($conexion, "INSERT INTO Factura(Id, id_ingreso, FormaPago, Persona, Fecha, Direccion, tipo_operacion) VALUES(NULL,'$num_factura','$formapago','$reg_cli[0]','".$ff[0]."-".$ff[1]."-".$ff[2]."','$dir','4');")or
-            die("Problemas en el select:".mysqli_error($conexion));
-            mysqli_query($conexion, "INSERT INTO DetalleFactura (Id, NroComprobante, Precio, tipo_operacion, observacion) VALUES(NULL, '$num_factura','$dinero','4','$observacion');");
-          echo "ok";
+        mysqli_query($conexion, "INSERT INTO Factura(Id, id_ingreso, FormaPago, Fecha, Direccion, tipo_operacion, usuario) VALUES(NULL,'$num_factura','$formapago','".$ff[0]."-".$ff[1]."-".$ff[2]."','$dir','4','$usuario');")or
+          die("Problemas en el select:".mysqli_error($conexion));
+          mysqli_query($conexion, "INSERT INTO DetalleFactura (Id, NroComprobante, Precio, tipo_operacion, observacion) VALUES(NULL, '$num_factura','$dinero','4','$observacion');");
+        echo $usuario;
 
-        }else{
-          echo "roto";
-        }
         break;
       case 'factura_compra':
         $tabla_cant = $_POST['tabla_cant'];

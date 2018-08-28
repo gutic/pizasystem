@@ -61,7 +61,7 @@
 									<a href="compra_producto.php">Compras Producto</a>
 							</li>
 							<li>
-									<a href="caja.php">Extracción/retiro </a>
+									<a href="caja.php">Ingreso / Egreso </a>
 							</li>
 							<li>
 								<a href="movimientos.php">Movimientos</a>
