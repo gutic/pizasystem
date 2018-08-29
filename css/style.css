@@ -44,3 +44,7 @@ body {
 #mensaje{
 	margin-top: 3%;
 }
+
+.form-control{
+	height: 200px;
+}

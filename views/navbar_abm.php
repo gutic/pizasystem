@@ -10,7 +10,7 @@
 	include_once('views/head.php');
 	include_once('css');
 ?>
-<!-- <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"> -->
+
 <link href="css/simple-sidebar.css" rel="stylesheet">
 <script type="text/javascript" src="js/altas_bajas.js"></script>
 <div class="navbar navbar-default navbar-fixed-top" style="background:black" rol="navigation">
@@ -45,7 +45,6 @@
 	</head>
 <body>
 	<div id="wrapper">
-			<!-- Sidebar -->
 			<div id="sidebar-wrapper">
 								<ul class="sidebar-nav">
 						<li class="sidebar-brand">
@@ -58,7 +57,6 @@
 						</li>
 				</ul>
 			</div>
-			<!-- /#sidebar-wrapper -->
 
 			<!-- Page Content -->
     <section id="inicio">
@@ -75,12 +73,6 @@
 			<!-- /#page-content-wrapper -->
 
 	</div>
-	<!-- /#wrapper -->
-	<!-- Bootstrap core JavaScript -->
-	<!-- <script src="vendor/jquery/jquery.min.js"></script>
-	<script src="vendor/popper/popper.min.js"></script>
-	<script src="vendor/bootstrap/js/bootstrap.min.js"></script> -->
-	<!-- Menu Toggle Script -->
 	<script>
 	$("#menu-toggle").click(function(e) {
 			e.preventDefault();
