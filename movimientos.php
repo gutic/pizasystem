@@ -7,14 +7,15 @@
 <form class="p-3 mb-2 bg-dark text-white">
 
 <div class="form-row">
+	
 	<div class="form-group col-md-3">
 		<label for="inputState">Tipo Movimiento</label>
 			<select id="tipo" class="form-control">
 				<option selected>Tipo...</option>
-				<option value="0">Venta</option>
-				<option value="1">Extraxión</option>
-				<option id="compra">Compra</option>
-
+				<option value="1">Venta</option>
+				<option value="2">Compra</option>
+				<option value="3">Extraxión</option>
+				<option value="4">Ingreso</option>
 			</select>
 	</div>
 	<div class="form-group col-md-3">
@@ -27,52 +28,28 @@
 	</div>
 	</div>
 	<div class="form-row">
-		<div class="form-group col-md-6">
-			<label for="inputCity">City</label>
-			<input type="text" class="form-control" id="inputCity">
-		</div>
-	<div class="form-group col-md-4">
-		<label for="inputState">State</label>
-			<select id="inputState" class="form-control">
-				<option selected>Choose...</option>
-				<option>...</option>
-			</select>
-	</div>
 		<div class="form-group col-md-2">
-			<label for="inputZip">Zip</label>
-			<input type="text" class="form-control" id="inputZip">
+			<label for="inputCity">Id</label>
 		</div>
+		<div class="form-group col-md-2">
+			<label for="inputState">N° comprobante</label>
 		</div>
-		<div class="form-group">
-		<div class="form-check">
-			<input class="form-check-input" type="checkbox" id="gridCheck">
-			<label class="form-check-label" for="gridCheck">
-				Check me out
-			</label>
+		<div class="form-group col-md-2">
+			<label for="inputZip">fecha</label>
 		</div>
+		<div class="form-group col-md-2">
+			<label for="inputZip">ingreso</label>
 		</div>
-		<button type="submit" class="btn btn-primary">Sign in</button>
+		<div class="form-group col-md-2">
+			<label for="inputZip">Egreso</label>
+		</div>
+		<div class="form-group col-md-2">
+			<label for="inputZip">Saldo</label>
+		</div>
+	</div>
 
 </form>
 
-	<form style="center">
-		<table>
-			<tr>
-				<td bgcolor="white">Buscar desde:</td>
-				<td><input type="date" name="fecha1" placeholder="dd/mm/aaaa" id="fecha1"></td>
-			</tr>
-			<tr>
-				<td bgcolor="white">Hasta:</td>
-				<td><input type="date" name="fecha2" placeholder="dd/mm/aaaa" id="fecha2" value="<?php echo date("Y-m-d");?>"></td>
-			</tr>
-		</table>
-		<table>
-			<tr>
-				<td><center>
-				<input type="button" value="Buscar Movimientos" onclick="movimientos_caja();">
-				</center></td>
-			</tr>
-		</table>
 
 		<div id="resultado">
 
