@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 29-08-2018 a las 16:27:50
+-- Tiempo de generación: 30-08-2018 a las 21:31:23
 -- Versión del servidor: 10.1.30-MariaDB-0ubuntu0.17.10.1
 -- Versión de PHP: 7.1.17-0ubuntu0.17.10.1
 
@@ -51,7 +51,7 @@ CREATE TABLE `Factura` (
   `FormaPago` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `Persona` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `NroComprobante` int(11) NOT NULL,
-  `Fecha` date NOT NULL,
+  `Fecha` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `Iva` float NOT NULL,
   `Descuento` float NOT NULL,
   `Direccion` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
@@ -78,9 +78,9 @@ CREATE TABLE `Insumo` (
 --
 
 INSERT INTO `Insumo` (`Id_insumo`, `Nombre`, `UnidadMedida`, `Cantidad`, `activo`) VALUES
-(1, 'peperoni', 0.2, 15, 1),
-(2, 'papas', 200, 7, 1),
-(3, 'aceitunas', 5, 200, 1),
+(1, 'peperoni', 0.2, 12.4, 1),
+(2, 'papas', 200, -793, 1),
+(3, 'aceitunas', 5, 155, 1),
 (4, 'morron', 1, 12, 0),
 (5, 'chorizo', 1, 4, 1),
 (6, 'mayonesa', 0.2, 10.8, 1),
@@ -135,10 +135,10 @@ CREATE TABLE `Producto` (
 --
 
 INSERT INTO `Producto` (`Id`, `Stock`, `NombreProducto`, `CostoProducto`, `esElaborado`, `activo`) VALUES
-(1, 100, 'Coca', 10.10, 0, 1),
+(1, 98, 'Coca', 10.10, 0, 1),
 (2, 0, 'papas_fritas', 20.00, 1, 1),
 (3, 0, 'Muzza_Napo', 16.00, 1, 1),
-(4, 201, 'Quilmes', 25.00, 0, 1),
+(4, 200, 'Quilmes', 25.00, 0, 1),
 (5, 200, 'PapasLays', 30.00, 0, 0),
 (6, 0, 'Choripan', 15.00, 1, 1);
 

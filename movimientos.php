@@ -7,20 +7,15 @@
 <form class="p-3 mb-2 bg-dark text-white">
 
 <div class="form-row">
-
 	<div class="form-group col-md-3">
 		<label for="inputState">Tipo Movimiento</label>
-			<select class="form-control">
-				<option selected>"asd"</option>
-
-			</select>
-			<!-- <select id="tipo" class="form-control">
+			<select id="tipo" class="form-control">
 				<option selected>Tipo...</option>
 				<option value="1">Venta</option>
 				<option value="2">Compra</option>
 				<option value="3">Extracción</option>
 				<option value="4">Ingreso</option>
-			</select> -->
+			</select>
 	</div>
 	<div class="form-group col-md-3">
 		<label>Desde</label>
@@ -39,10 +34,13 @@
 			<label for="inputState">N° comprobante</label>
 		</div>
 		<div class="form-group col-md-2">
-			<label for="inputZip">fecha</label>
+			<label for="inputZip">Fecha</label>
 		</div>
 		<div class="form-group col-md-2">
-			<label for="inputZip">ingreso</label>
+			<label for="inputZip">Hora</label>
+		</div>
+		<div class="form-group col-md-2">
+			<label for="inputZip">Ingreso</label>
 		</div>
 		<div class="form-group col-md-2">
 			<label for="inputZip">Egreso</label>

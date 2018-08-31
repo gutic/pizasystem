@@ -2,6 +2,7 @@
   require("../config/config.php");
   //extiende de la clase mysql asi no tngo q instanciarla
   //la clase mysql conecta a la base
+    session_start();
     $boton=$_POST['boton'];
 
     switch ($boton) {
@@ -34,7 +35,6 @@
         $logok = FALSE;
         $result = mysqli_query($conexion,"SELECT * FROM Usuario WHERE Usuario ='$Usuario' AND Contrasena='$Contrasena';");
         if($Usua=mysqli_fetch_array($result)){
-          session_start();
           $_SESSION['Id']=$Usua[0];
           $_SESSION['Usuario']=$Usua[1];
           $_SESSION['logOk']='YES';
@@ -90,21 +90,21 @@
       case 'factura':
         $tabla_cant = $_POST['tabla_cant'];
         $tabla_id = $_POST['tabla_id'];
-        $fecha = $_POST['fecha'];
-        $ff= explode("/",$fecha);
         $cli = $_POST['cliente'];
         $dir = $_POST['dir'];
         $formapago = $_POST['formapago'];
         $tipo_factura = $_POST['tipo_factura'];
         $descuento = $_POST['Descuento'];
-        $no_vacio = strlen($fecha) * strlen($cli) * strlen($dir) * strlen($formapago);
+        $usuario = $_SESSION['Id'];
+        $no_vacio = strlen($cli) * strlen($dir) * strlen($formapago);
         $tabla_id= explode(",",$tabla_id);
         $tabla_cant= explode(",",$tabla_cant);
         if ($no_vacio > 0 && $tabla_cant[0] > 0 ){
           $num_factura = ulti_factura(1);
           $result = mysqli_query($conexion,"SELECT * FROM Persona WHERE Nombre ='$cli';");
           if($reg_cli = mysqli_fetch_array($result)){
-            mysqli_query($conexion, "INSERT INTO Factura (Id, Tipo, FormaPago, Persona, NroComprobante, Fecha, Iva, Descuento, Direccion, tipo_operacion) VALUES(NULL, '$tipo_factura','$formapago','$reg_cli[0]','$num_factura','".$ff[0]."-".$ff[1]."-".$ff[2]."','0.21','$descuento','$dir','1');");
+            mysqli_query($conexion, "INSERT INTO Factura (Id, Tipo, FormaPago, Persona, NroComprobante, Iva, Descuento, Direccion, tipo_operacion, usuario) VALUES(NULL, '$tipo_factura','$formapago','$reg_cli[0]','$num_factura','0.21','$descuento','$dir','1','$usuario');")
+            or die("Problemas en el insert factura:".mysqli_error($conexion));
             for ($i=0; $i < sizeof($tabla_id); $i++) {
               if ($tabla_id[$i] > 0){
                 $result = mysqli_query($conexion,"SELECT * FROM Producto WHERE Id ='$tabla_id[$i]';");
@@ -135,7 +135,7 @@
             echo -1;
           };
         }else {
-          echo $tabla_cant;
+          echo 0;
         };
         break;
       case 'buscar':
@@ -265,7 +265,6 @@
         break;
 
       case 'ingreso_dinero':
-        session_start();
         $dinero = $_POST['dinero'];
         $observacion = $_POST['observacion'];
         $fecha = $_POST['fecha'];
@@ -274,11 +273,10 @@
         $formapago = $_POST['formapago'];
         $usuario = $_SESSION['Id'];
         $num_factura = ulti_factura(4);
-        mysqli_query($conexion, "INSERT INTO Factura(Id, id_ingreso, FormaPago, Fecha, Direccion, tipo_operacion, usuario) VALUES(NULL,'$num_factura','$formapago','".$ff[0]."-".$ff[1]."-".$ff[2]."','$dir','4','$usuario');")or
+        mysqli_query($conexion, "INSERT INTO Factura(Id, id_ingreso, FormaPago, Fecha, Direccion, tipo_operacion, usuario) VALUES(NULL,'$num_factura','$formapago','$reg_cli[0]','".$ff[0]."-".$ff[1]."-".$ff[2]."','$dir','4','$usuario');")or
           die("Problemas en el select:".mysqli_error($conexion));
           mysqli_query($conexion, "INSERT INTO DetalleFactura (Id, NroComprobante, Precio, tipo_operacion, observacion) VALUES(NULL, '$num_factura','$dinero','4','$observacion');");
-        echo $usuario;
-
+        echo "ok";
         break;
       case 'factura_compra':
         $tabla_cant = $_POST['tabla_cant'];

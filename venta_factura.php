@@ -49,7 +49,7 @@
 							<table>
 								<tr>
 									<td><b>fecha:</b></td>
-									<td><input type="date" name="anti" placeholder="dd/mm/aaaa" id="fecha" value="<?php echo date("Y-m-d");?>"></td>
+									<td><input type="date" name="anti" placeholder="dd/mm/aaaa" id="fecha" value="<?php echo date("Y-m-d");?>" readonly="readonly"></td>
 								</tr>
 								<tr>
 									<td><b>Señor(es):</b></td>
