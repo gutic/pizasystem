@@ -19,33 +19,33 @@
 	</div>
 	<div class="form-group col-md-3">
 		<label>Desde</label>
-		<input type="date" class="form-control" id="fecha1">
+		<input type="date" class="form-control" value="<?php echo date("Y-m-d");?>" id="fecha1">
 	</div>
 	<div class="form-group col-md-3">
 		<label>Hasta</label>
-		<input type="date" class="form-control" id="fecha2">
+		<input type="date" class="form-control"  value="<?php echo date("Y-m-d");?>" id="fecha2" onchange="validar_hasta();">
 	</div>
 	</div>
 	<div class="form-row">
-		<div class="form-group col-md-2">
+		<div class="form-group col-md-1">
 			<label for="inputCity">Id</label>
 		</div>
 		<div class="form-group col-md-2">
-			<label for="inputState">N° comprobante</label>
+			<label for="inputState">N°comprobante</label>
 		</div>
 		<div class="form-group col-md-2">
 			<label for="inputZip">Fecha</label>
 		</div>
-		<div class="form-group col-md-2">
+		<div class="form-group col-md-1">
 			<label for="inputZip">Hora</label>
 		</div>
-		<div class="form-group col-md-2">
+		<div class="form-group col-md-1">
 			<label for="inputZip">Ingreso</label>
 		</div>
-		<div class="form-group col-md-2">
+		<div class="form-group col-md-1">
 			<label for="inputZip">Egreso</label>
 		</div>
-		<div class="form-group col-md-2">
+		<div class="form-group col-md-1">
 			<label for="inputZip">Saldo</label>
 		</div>
 	</div>

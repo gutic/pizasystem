@@ -48,7 +48,7 @@ function limpiar()
 function factura_venta()
 {
 
-	var id_prod= $('#id_prod').val();
+	var id_prod = $('#id_prod').val();
 	var Cantidad = $('#Cantidad').val();
 	var fecha = $('#fecha').val();
 	var cliente = $('#cliente').val();

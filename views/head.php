@@ -13,8 +13,10 @@
 	<!-- Mis Js -->
 	<script type="text/javascript" src="js/main.js"></script>
 	<script type="text/javascript" src="js/compra.js"></script>
+	<script type="text/javascript" src="js/movimientos.js"></script>
 
 	<!-- IMPORTAMOS LOS ESTILOS DEL FRAMEWORK DE BOOTSTRAP-->
+
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<link rel="stylesheet" type="text/css" href="css/bootstrap-theme.css">
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
