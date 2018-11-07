@@ -143,6 +143,7 @@ function editar_cliente(i){
   $("[name='cuit_cliente']").val(datos[i]["Cuit"]);
   $("[name='dir_cliente']").val(datos[i]["Direccion"]);
   $("[name='tel_cliente']").val(datos[i]["Telefono"]);
+	$("[name='cumple_cliente']").val(datos[i]["cumple"]);
 }
 function buscar_cliente(){
 
@@ -164,15 +165,16 @@ function buscar_cliente(){
 	        listado += ' 		<td style="width:20%">'+datos[i]["Telefono"]+'</td>'
 	        listado += ' 		<td style="width:20%">'+datos[i]["Direccion"]+'</td>'
 	        listado += ' 		<td style="width:20%">'+datos[i]["Cuit"]+'</td>'
+					listado += ' 		<td style="width:20%">'+datos[i]["cumple"]+'</td>'
 	        listado += '		<td style="width:10%"> <a type="button" href="javascript:editar_cliente('+i+')">editar</a></td>'
 	        listado += '		<td style="width:10%"> <a type="button" href="javascript:eliminar_cliente('+i+')">eliminar</a></td>'
 	        listado += '</tr>'
 	      }
-	      $('#busco_cliente').html(listado);
+	      $('#resultado').html(listado);
 			}else {
 				var listado = "";
 	      listado += '<div class="alert alert-danger" style="height:40px" role="alert"><b>Datos no Encontrados </b></div>'
-				$('#busco_cliente').html(listado);
+				$('#resultado').html(listado);
 			}
 	});
 }
@@ -495,7 +497,7 @@ function buscar_insunmo_de_receta(){
 		url: 'php/altas_bajas.php',
 		data: "id_editar="+id_editar+"&boton=buscar_insumo_receta"
 		}).done(function(resp){
-				var contenedor = document.getElementById("oculto");		
+				var contenedor = document.getElementById("oculto");
 				contenedor.style.display = "block";
 				insumo = eval(resp);
 				if (insumo != null){

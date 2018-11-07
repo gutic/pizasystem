@@ -13,7 +13,7 @@
 	<!-- Mis Js -->
 	<script type="text/javascript" src="js/main.js"></script>
 	<script type="text/javascript" src="js/compra.js"></script>
-	<script type="text/javascript" src="js/movimientos.js"></script>
+
 
 	<!-- IMPORTAMOS LOS ESTILOS DEL FRAMEWORK DE BOOTSTRAP-->
 

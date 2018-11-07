@@ -54,7 +54,7 @@
 							<table>
 								<tr>
 									<td><b>fecha:</b></td>
-									<td><input type="date" name="fecha" placeholder="dd/mm/aaaa" id="fecha" value="<?php echo date("Y-m-d");?>"></td>
+									<td><input type="date" name="fecha" placeholder="dd/mm/aaaa" id="fecha" value="<?php echo date("Y-m-d");?>" readonly="readonly"> </td>
 								</tr>
 								<tr>
 									<td><b>Provedor:</b></td>
@@ -90,7 +90,7 @@
 								</tr>
 							</table>
 							<input type="button" value="Limpiar"  onclick="limpiar();" />
-							<input type="button" value="Generar Factura" onclick="factura_compra();" />
+							<input type="button" value="Generar Factura" onclick="factura_compraInsumo();" />
 						</form>
 					</fieldset>
 				</td>

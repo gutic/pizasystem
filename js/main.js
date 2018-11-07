@@ -412,24 +412,3 @@ function agregar_producto(id_prod)
 		}
 
 }
-
-function factura_compra()
-{
-	var data_form = $("#formulario").serialize()
-	alert(fecha);
-	$.ajax({
-		url:'php/cl_abm.php',
-		type:'POST',
-		data: "boton=factura_compra&"+data_form+'&tabla_cant='+tabla_cant+'&tabla_id='+tabla_id+'&tabla_precio='+tabla_precio
-	}).done(function(resp){
-		alert(resp);
-		if(resp > 0){
-			NumeroFactura = resp;
-			limpiar();
-		}else {
-			if(resp == 0){
-				alert("debe rellenar los cambos");
-			};
-		};
-	});
-}

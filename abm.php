@@ -103,6 +103,10 @@
 									<td><b>Telef&oacute;no:</b></td>
 									<td><input type="text" name="tel_cliente" ></td>
 								</tr>
+								<tr>
+									<td><b>Cumpleaños:</b></td>
+									<td> <input type="date" name="cumple_cliente" id="cumple"> </td>
+								</tr>
 							</table>
 							<input type="button" value="Guardar" onclick="guardar_cliente();" />
 							<input type="button" value="Limpiar"  onclick="limpiar();" />
@@ -127,6 +131,7 @@
 						 <td style="width:20%"><b>telefono:</b></td>
 						 <td style="width:20%"><b>direccion</b></td>
 						 <td style="width:20%"><b>Cuit</b></td>
+						 <td style="width:20%"><b>Cumpleaños</b></td>
 						 <td style="width:10%">editar </td>
 						 <td style="width:10%">eliminar </td>
 					 </tr>

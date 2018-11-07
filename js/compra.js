@@ -4,7 +4,7 @@ function factura_compraProducto()
 	$.ajax({
 		url:'php/compra.php',
 		type:'POST',
-		data: "boton=factura_compra&"+data_form+'&tabla_cant='+tabla_cant+'&tabla_id='+tabla_id+'&tabla_precio='+tabla_precio
+		data: "boton=factura_compraProducto&"+data_form+'&tabla_cant='+tabla_cant+'&tabla_id='+tabla_id+'&tabla_precio='+tabla_precio
 	}).done(function(resp){
 		alert(resp);
 		if(resp > 0){
@@ -17,6 +17,26 @@ function factura_compraProducto()
 		};
 	});
 }
+function factura_compraInsumo()
+{
+	var data_form = $("#formulario").serialize()
+	$.ajax({
+		url:'php/compra.php',
+		type:'POST',
+		data: "boton=factura_compraInsumo&"+data_form+'&tabla_cant='+tabla_cant+'&tabla_id='+tabla_id+'&tabla_precio='+tabla_precio
+	}).done(function(resp){
+		alert(resp);
+		if(resp > 0){
+			NumeroFactura = resp;
+			limpiar();
+		}else {
+			if(resp == 0){
+				alert("debe rellenar los cambos");
+			};
+		};
+	});
+}
+
 function limpiar()
 {
 	$("#formulario [type='text']").val("")//limpiar formulario (todos los  type="text")

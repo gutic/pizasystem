@@ -55,8 +55,9 @@
       $cuit = $_POST["cuit_cliente"];
       $dir = $_POST["dir_cliente"];
       $tel = $_POST["tel_cliente"];
-      mysqli_query($conexion,"INSERT INTO Persona(Id, TipoPersona, Nombre, Telefono, Direccion, Cuit, activo)
-      VALUES(NULL, '1', '$cliente', '$tel', '$dir', '$cuit', '1')") or
+      $cumple = $_POST["cumple_cliente"];
+      mysqli_query($conexion,"INSERT INTO Persona(Id, TipoPersona, Nombre, Telefono, Direccion, Cuit, activo, cumple)
+      VALUES(NULL, '1', '$cliente', '$tel', '$dir', '$cuit', '1', '$cumple')") or
       die("Problemas en el select:".mysqli_error($conexion));
       echo "ok";
       break;
@@ -68,7 +69,7 @@
       //si escribió algo en buscar
       if(isset($_POST['consulta'])){
       	$id = $conexion -> real_escape_string($_POST['consulta']);
-      	$query = "SELECT * FROM Persona WHERE activo = '1' AND  (Nombre like '%".$id."%' OR Id like '%".$id."%')";
+      	$query = "SELECT * FROM Persona WHERE activo = '1' AND TipoPersona = '1' AND  (Nombre like '%".$id."%' OR Id like '%".$id."%')";
       }
       $resultado = $conexion -> query($query);
       if($resultado->num_rows > 0){
@@ -86,7 +87,8 @@
       $cuit = $_POST["cuit_cliente"];
       $dir = $_POST["dir_cliente"];
       $tel = $_POST["tel_cliente"];
-      mysqli_query($conexion,"UPDATE Persona SET Nombre = '$cliente', Telefono = '$tel', Direccion = '$dir', Cuit = '$cuit' WHERE Id = '$id';")or
+      $cumple = $_POST["cumple_cliente"];
+      mysqli_query($conexion,"UPDATE Persona SET Nombre = '$cliente', Telefono = '$tel', Direccion = '$dir', Cuit = '$cuit', cumple = '$cumple' WHERE Id = '$id';")or
       die("Problemas en el update:".mysqli_error($conexion));
       echo "ok";
       break;
