@@ -3,7 +3,6 @@
 	error_reporting(E_ERROR);
 	include_once('views/head.php');
 	include_once('views/navbar.php');
-
 ?>
  <div align="center" style="width:60%" class="col-xs-50 col-sm-0 col-md-50 col-lg-0 well">
 	 <table id="numero1" style="width:100%" border="3">
@@ -60,7 +59,9 @@
 	<script type="text/javascript">
 	// funcion que se inicia luego de cargar la pagina
 	$(function () {
-		mostrar_factura(NumeroFactura);
+		'<?php $num = $_GET['num']; ?>';
+		var num = '<?php echo $num; ?>';
+		mostrar_factura(num);
 	})
 	</script>
 <?php

@@ -133,9 +133,9 @@ function agregar(id_prod, Cantidad)
 
 
 
-function mostrar_factura()
+function mostrar_factura(num)
 {
-	//var num = NumeroFactura;
+	var num = num;
 	$.ajax({
 		url:'php/cl_abm.php',
 		type:'POST',
@@ -501,7 +501,7 @@ function observar(observ, listado){
 
 function ver_factura(i){
 	NumeroFactura = datos[i]["Id"];
-	location.href='factura_ya.php';
+	location.href='factura_ya.php?num='+NumeroFactura;
 }
 
 function validar_hasta()
