@@ -6,6 +6,11 @@ var num_id = [];
 var  id_fila;
 var NumeroFactura;
 
+//____ movimientos///
+var listado = "";
+var id;
+var ingreso;
+
 
 function confirmar()
 {
@@ -130,8 +135,7 @@ function agregar(id_prod, Cantidad)
 
 function mostrar_factura()
 {
-	var num = NumeroFactura;
-
+	//var num = NumeroFactura;
 	$.ajax({
 		url:'php/cl_abm.php',
 		type:'POST',
@@ -411,4 +415,131 @@ function agregar_producto(id_prod)
 			alert("Valores tienen que ser mayores a cero");
 		}
 
+}
+//_Movimientos//
+
+
+function buscar()
+{
+	var saldo = 0;
+	var tipo = $('#tipo').val();
+	var desde = $('#fecha1').val();
+	var hasta = $('#fecha2').val();
+	var accion = "busco";
+	$.ajax({
+		type: "POST",
+		url: 'php/busco_mov.php',
+		data: {tipo : tipo, boton : accion, desde : desde, hasta : hasta}
+	}).done(function(resp){
+		datos = eval(resp);
+		if (datos != 0){
+			listado += '<tr>'
+			listado += '<td style="width:10%"><b>Id:</b></td>'
+			listado += '<td style="width:10%"><b>N°comprobante</b></td>'
+			listado += '<td style="width:10%"><b>Fecha</b></td>'
+			listado += '<td style="width:10%"><b>Hora</b></td>'
+			listado += '<td style="width:20%"><b>Operador</b></td>'
+			listado += '<td style="width:10%"><b>Detalle</b></td>'
+			listado += '<td style="width:10%"><b>ingreso</b></td>'
+			listado += '<td style="width:10%"><b>Egreso</b></td>'
+			listado += '<td style="width:10%"><b>Saldo</b></td>'
+			listado += '</tr>'
+			for(var i=0;i<datos.length;i++){
+				var hora = datos[i]["Fecha"];
+				hora = hora.split(" ");
+				var tipos = datos[i]["tipo_operacion"];
+				observacion = "";
+				listado += '<tr>'
+				listado += ' 		<td style="width:10%">'+datos[i]["Id"]+'</td>'
+				listado += ' 		<td style="width:10%">'+datos[i]["NroComprobante"]+'</td>'
+				listado += ' 		<td style="width:10%">'+hora[0]+'</td>'
+				listado += ' 		<td style="width:10%">'+hora[1]+'</td>'
+				listado += ' 		<td style="width:10%">'+datos[i]["Usuario"]+'</td>'
+
+				id = datos[i]["Id"];
+
+				if(tipos == 4 || tipos == 3){
+			   	accion = "detalle";
+					var observ = "";
+					$.ajax({
+						type: "POST",
+						url: 'php/busco_mov.php',
+						data: {tipos : tipos, id : id, boton : accion}
+					}).done(function(respuesta){
+						datos2 = eval(respuesta);
+						observ = datos2[0]["observacion"];
+
+					});
+					alert(observ);
+					console.log(observ);
+					listado +=' 		<td style="width:10%">'+observ+'</td>'
+				}else{
+					console.log(i);
+					listado +=' <td style="width:10%"> <a type="button" href="javascript:ver_factura('+i+')">Ver Factura</a></td>'
+				}
+				var total = parseFloat(datos[i]["total"]);
+				listado += '	<td style="width:10%">'+total.toFixed(2)+'</td>'
+				listado += '	<td style="width:10%">_____________</td>'
+				saldo = total + saldo;
+				listado += '	<td style="width:10%">'+saldo.toFixed(2)+'</td>'
+				listado += '</tr>'
+			}
+
+			$('#resultado').html(listado);
+
+		} else {
+				var listado = "";
+				listado += '<div class="alert alert-danger" style="height:40px" role="alert"><b>Datos no Encontrados </b></div>'
+				$('#resultado').html(listado);
+		}
+	});
+}
+function observar(observ, listado){
+
+	listado +=' 		<td style="width:10%">HOLA</td>'
+}
+
+function ver_factura(i){
+	NumeroFactura = datos[i]["Id"];
+	location.href='factura_ya.php';
+}
+
+function validar_hasta()
+{
+
+	 var fecha1=$('#fecha1').val();
+	 var fecha2=$('#fecha2').val();
+   if(fecha1 > fecha2){
+     $('#fecha1').val(fecha2);
+   }
+}
+function validar_desde()
+{
+	var hoy = new Date();
+	var dd = hoy.getDate();
+	var mm = hoy.getMonth()+1; //hoy es 0!
+	var yyyy = hoy.getFullYear();
+
+	if(dd<10) {
+	    dd='0'+dd
+	}
+
+	if(mm<10) {
+	    mm='0'+mm
+	}
+
+	hoy = yyyy+'-'+mm+'-'+dd;
+
+
+	var fecha1=$('#fecha1').val();
+	var fecha2=$('#fecha2').val();
+
+	if(fecha1 > hoy){
+		$('#fecha1').val(hoy);
+		$('#fecha2').val(hoy);
+	}else {
+		if(fecha1 > fecha2){
+			$('#fecha2').val(fecha1);
+		}
+	}
 }
