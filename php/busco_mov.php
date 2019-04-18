@@ -8,7 +8,14 @@ $boton = $_POST['boton'];
   switch ($boton) {
     case 'busco':
     if($tipo == 5){ // 5 Todo
-      $query = "SELECT fact.*, usr.Usuario FROM Factura as fact INNER JOIN Usuario as usr WHERE fact.usuario = usr.Id";
+      $query = "SELECT fact.*, usr.Usuario, det.*, IF(det.tipo_operacion = 1 OR det.tipo_operacion = 2 , SUM((det.Cantidad * det.Precio)*fact.Iva + (det.Cantidad * det.Precio)),SUM(det.Precio)) as total
+      FROM Factura as fact, Usuario as usr, DetalleFactura as det
+      WHERE (fact.Fecha >= '$desde 00:00:00' AND fact.fecha <= '$hasta 23:59:59')
+	    AND fact.usuario = usr.Id
+      AND (det.NroComprobante = fact.NroComprobante OR det.NroComprobante = fact.id_compra OR det.NroComprobante = fact.id_egreso OR det.NroComprobante = fact.id_ingreso)
+      AND fact.tipo_operacion = det.tipo_operacion
+      GROUP BY fact.Id
+      ORDER BY fact.Fecha";
       $resultado = $conexion -> query($query);
       if($resultado->num_rows > 0){
         while ($reg = mysqli_fetch_assoc($resultado)) {
@@ -19,8 +26,8 @@ $boton = $_POST['boton'];
         echo 0;
       }
     }else {
-      $query = "SELECT fact.Id, fact.Persona,fact.NroComprobante,fact.Fecha, fact.tipo_operacion, fact.usuario, usr.Usuario, det.NroComprobante,
-      SUM(((det.Cantidad * det.Precio)*fact.Iva + (det.Cantidad * det.Precio)) - fact.Descuento) as total, det.tipo_operacion
+      $query = "SELECT fact.Id, fact.Persona,fact.NroComprobante,fact.Fecha, fact.tipo_operacion, fact.usuario, fact.Descuento, usr.Usuario, det.NroComprobante,
+      SUM((det.Cantidad * det.Precio)*fact.Iva + (det.Cantidad * det.Precio)) as total, det.tipo_operacion
       FROM Factura as fact, Usuario as usr, DetalleFactura as det
       WHERE (fact.Fecha >= '$desde 00:00:00'AND
        fact.fecha <= '$hasta 23:59:59')

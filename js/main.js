@@ -470,17 +470,23 @@ function buscar()
 						observ = datos2[0]["observacion"];
 
 					});
-					alert(observ);
-					console.log(observ);
-					listado +=' 		<td style="width:10%">'+observ+'</td>'
+					listado +=' 		<td style="width:10%">'+datos[i]["observacion"]+'</td>'
 				}else{
-					console.log(i);
 					listado +=' <td style="width:10%"> <a type="button" href="javascript:ver_factura('+i+')">Ver Factura</a></td>'
 				}
-				var total = parseFloat(datos[i]["total"]);
-				listado += '	<td style="width:10%">'+total.toFixed(2)+'</td>'
-				listado += '	<td style="width:10%">_____________</td>'
-				saldo = total + saldo;
+				var total = parseFloat(datos[i]["total"]-datos[i]["Descuento"]);
+
+
+				if(tipos == 1 || tipos == 4){
+					saldo = total + saldo;
+					listado += '	<td style="width:10%">'+total.toFixed(2)+'</td>'
+					listado += '	<td style="width:10%">_____________</td>'
+				}
+				if(tipos == 2 || tipos == 3){
+					saldo = saldo - total ;
+					listado += '	<td style="width:10%">_____________</td>'
+					listado += '	<td style="width:10%">'+total.toFixed(2)+'</td>'
+				}
 				listado += '	<td style="width:10%">'+saldo.toFixed(2)+'</td>'
 				listado += '</tr>'
 			}

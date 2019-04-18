@@ -1,6 +1,6 @@
 <?php
 	$host="localhost";
-	$bbdd="usertest";
+	$bbdd="pizasystem";
 	$user="root";
 	$pass="qweasd";
 	$conexion=new mysqli($host,$user,$pass,$bbdd);
