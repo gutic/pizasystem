@@ -35,7 +35,7 @@ switch ($boton) {
           mysqli_query($conexion, "UPDATE Producto SET Stock = '$stock_actual' WHERE Id = '$tabla_id[$i]';") or
           die("Problemas en el select:".mysqli_error($conexion));
           //agregar a detalle factura
-          mysqli_query($conexion, "INSERT INTO DetalleFactura (Id, NroComprobante, IdProducto, Cantidad, Precio, tipo_operacion) VALUES(NULL, '$num_factura','$tabla_id[$i]','$tabla_cant[$i]','$tabla_precio[$i]','5');");
+          mysqli_query($conexion, "INSERT INTO DetalleFactura (Id, NroComprobante, IdProducto, Cantidad, Precio, tipo_operacion) VALUES(NULL, '$num_factura','$tabla_id[$i]','$tabla_cant[$i]','$tabla_precio[$i]','2');");
         };
       };
       echo $num_factura;
