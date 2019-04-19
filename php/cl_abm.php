@@ -206,18 +206,42 @@
         }
         echo json_encode($data);
         break;
+      case 'factura_yaCompra':
+          $tipo = $_POST['tipo'];
+          $num = $_POST['num'];
+          if ($num == 0){
+            $ulti = ulti_factura($tipo);
+            $ulti -= 1;
+          }else{
+            $ulti = $num;
+          }
 
-      case 'test':
-        $tabla_cant = $_POST['tabla_cant'];
-        $tabla_id = $_POST['tabla_id'];
-        $tabla_cant= explode(",",$tabla_cant);
-        $algo = $tabla_cant[2];
-        for ($i=0; $i < sizeof($tabla_cant); $i++) {
-          $algo += $tabla_cant[$i];
-        };
-        echo $algo;
-        break;
+          if($tipo == 1){
+            $registros=mysqli_query($conexion,"SELECT * FROM Factura WHERE id_compra = '$ulti' AND tipo_operacion = '$tipo';") or
+                die("Problemas en el select:".mysqli_error($conexion));
+          }
+          if($reg_factura=mysqli_fetch_array($registros))
+          {
+            $registros=mysqli_query($conexion,"SELECT * FROM Persona WHERE Id = '$reg_factura[6]';") or
+              die("Problemas en el select:".mysqli_error($conexion));
+            $reg_persona=mysqli_fetch_array($registros);
 
+            $registros=mysqli_query($conexion,"SELECT * FROM DetalleFactura WHERE NroComprobante = '$ulti' AND tipo_operacion = '$tipo';") or
+              die("Problemas en el select:".mysqli_error($conexion));
+            $reg_detalle=mysqli_fetch_array($registros);
+
+            $registros=mysqli_query($conexion,"SELECT NombreProducto FROM Producto WHERE Id = '$reg_detalle[2]';") or
+              die("Problemas en el select:".mysqli_error($conexion));
+            $reg_prod =mysqli_fetch_array($registros);
+
+            $datos[] = array("tipo" => $reg_factura[4], "numero" => $ulti, "fecha" => $reg_factura[8], "formapago" => $reg_factura[5],
+              "nombre_persona" => $reg_persona[2], "cuit_persona" => $reg_persona[5], "direccion" => $reg_persona[4], "cuit" => $reg_persona[5], "cantidad" => $reg_detalle[3], "precio" => $reg_detalle[4], "nombre_producto" => $reg_prod[0],
+              "forma_pago" => $reg_factura[5], "direccion_emision" => $reg_factura[11]);
+            echo json_encode($datos);
+          }else{
+            echo FALSE;
+          }
+          break;
       case 'detalle_factura_ya':
         $tipo = $_POST['tipo'];
         $num = $_POST['num'];

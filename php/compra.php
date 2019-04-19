@@ -50,7 +50,7 @@ switch ($boton) {
     $tabla_cant = $_POST['tabla_cant'];
     $tabla_id = $_POST['tabla_id'];
     $tabla_precio = $_POST['tabla_precio'];
-    $prove = $_POST['provedor'];
+    $prove = $_POST['prove'];
     $dir = $_POST['dir'];
     $formapago = $_POST['formapago'];
     $tipo_factura = $_POST['tipo_factura'];
@@ -61,7 +61,7 @@ switch ($boton) {
     $tabla_precio = explode(",",$tabla_precio);
     if ($tabla_cant[0] > 0 ){
       $num_factura = ulti_factura(2);
-      $result = mysqli_query($conexion,"SELECT * FROM Persona WHERE Id ='$prove';");
+      $result = mysqli_query($conexion,"SELECT * FROM Persona WHERE Nombre = '$prove';");
       if($reg_cli = mysqli_fetch_array($result)){
         mysqli_query($conexion, "INSERT INTO Factura (Id, Tipo, FormaPago, Persona, id_compra, Descuento, Direccion, tipo_operacion, usuario) VALUES(NULL, '$tipo_factura','$formapago','$reg_cli[0]','$num_factura','$descuento','$dir','2','$usuario');");
         for ($i=0; $i < sizeof($tabla_id); $i++) {
