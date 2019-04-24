@@ -276,6 +276,80 @@ function mostrar_facturaCompra(num)
 	});
 }
 
+//AL vender
+
+function mostrar_facturaVenta(num)
+{
+	var num = num;
+	//alert(num);
+	$.ajax({
+		url:'php/cl_abm.php',
+		type:'POST',
+		data: 'tipo='+1+'&num='+num+"&boton=factura_yaVenta"
+	}).done(function(resp){
+		data = eval(resp);
+		var listado = "";
+		listado += '<tr>'
+		listado += '<td  style="width:50%" valign="top">EMPRESA: '
+		listado += '<br>'
+		listado += '<p align="center"> Pizeria Lo Vago SA</p>'
+		listado += '</td>'
+		listado += '<td style="width:50%">TIPO FACTURA: '+data[0].tipo+' <br>'
+		listado += 'NUMERO: '+data[0].numero+' <br> FECHA: '+data[0].fecha+' <br> CUIT: MICUIT  <br>'
+		listado += '</td>'
+		listado += '</tr>'
+		$("#numero1").html( listado );
+		var listado = "";
+		listado += '<br>NOMBRE CLIENTE: '+data[0].nombre_persona+'  </b>'
+		listado += '<br>domicilio: '+data[0].direccion+'  '
+		listado += '<br>LUGAR de EMISION: '+data[0].direccion_emision+' '
+		$("#numero2").html(listado);
+		var listado = "";
+		listado += '<br>'
+		listado += 'CUIT/CUIL: <br> '+data[0].cuit+' '
+		$("#numero3").html(listado);
+		var listado = "";
+		listado += '<br>'
+		listado += 'Forma de pago: <br> '+data[0].forma_pago+' '
+		$("#numero4").html(listado);
+	});
+	$.ajax({
+	type: "POST",
+	url: 'php/cl_abm.php',
+	data: 'num='+num+"&boton=detalle_factura"
+	}).done(function(resp){
+		datos = eval(resp);
+		var subtotal = 0;
+		var listado = "";
+		// alert(datos[0]["Precio"]);
+		for(var i=0;i<datos.length;i++){
+			var bgcolor = (i%2==0) ? "#FFFFFF":"#EDEDED";
+			listado += '	<tr bgcolor="'+bgcolor+'">'
+			listado += ' 		<td style="width:50%">'+datos[i]["NombreProducto"]+'</td>'
+			listado += ' 		<td style="width:20%">'+datos[i]["Cantidad"]+'</td>'
+			listado += ' 		<td style="width:20%">$'+datos[i]["Precio"]+'</td>'
+			listado += ' 		<td style="width:10%">$'+datos[i]["Precio"]*datos[i]["Cantidad"]+'</td>'
+			listado += '	</tr>'
+			subtotal += datos[i]["Precio"]*datos[i]["Cantidad"];
+		}
+		$("#numero5").html(listado);
+		iva = subtotal*(datos[0]["Iva"]);
+		total = (iva + subtotal)-(datos[0]["Descuento"]);
+		var lista = "";
+		lista += ' $'+subtotal.toFixed(2)+''
+		lista += ' <br> $'+datos[0]["Descuento"]+' '
+		lista += '<br> $'+iva.toFixed(2)+''
+		$("#numero6").html(lista);
+
+		var lista = "";
+		lista += 'TOTAL'
+		lista += '<br>'
+		lista += '<p align="center"> $'+total.toFixed(2)+'</p>'
+		$("#numero7").html(lista);
+
+	});
+}
+
 function extraer_dinero()
 {
 	if(validarCaja()){
@@ -584,11 +658,11 @@ function observar(observ, listado){
 
 function ver_factura(i){
 	NumeroFactura = datos[i]["Id"];
-	location.href='factura_ya.php?num='+NumeroFactura;
+	location.href='facturaYaVenta.php?num='+NumeroFactura;
 }
 function ver_facturaCompra(i){
 	NumeroFactura = datos[i]["Id"];
-	location.href='factura_yaCompra.php?num='+NumeroFactura;
+	location.href='facturaYaCompra.php?num='+NumeroFactura;
 }
 
 function validar_hasta()

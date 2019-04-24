@@ -19,7 +19,7 @@
 							<br>
 							Cantidad<input type="number" id="Cantidad" value="0">
 							<br>
-							Precio Unitario<input type="number" id="precio" value="0">
+							Precio Total<input type="number" id="precio" value="0">
 
 							<div id="datos" align="left"></div>
 
@@ -34,7 +34,7 @@
 
 									<td style="width:10%"> cantidad </td>
 
-									<td style="width:10%"> Precio Unitario </td>
+									<td style="width:10%"> Precio Total </td>
 
 									<td style="width:10%">________ </td>
 

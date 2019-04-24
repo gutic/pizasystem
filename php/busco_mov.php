@@ -36,7 +36,8 @@ $boton = $_POST['boton'];
       AND det.NroComprobante = fact.NroComprobante
       AND fact.tipo_operacion = 1
       AND det.tipo_operacion = 1
-      GROUP BY fact.Id";
+      GROUP BY fact.Id
+      ORDER BY fact.Fecha";
       $resultado = $conexion -> query($query);
       if($resultado->num_rows > 0){
         while ($reg = mysqli_fetch_assoc($resultado)) {
@@ -57,7 +58,8 @@ $boton = $_POST['boton'];
       AND fact.id_compra = det.NroComprobante
       AND fact.tipo_operacion = 2
       AND det.tipo_operacion = 2
-      GROUP BY fact.Id";
+      GROUP BY fact.Id
+      ORDER BY fact.Fecha";
       $resultado = $conexion -> query($query);
       if($resultado->num_rows > 0){
         while ($reg = mysqli_fetch_assoc($resultado)) {
