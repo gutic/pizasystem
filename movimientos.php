@@ -4,8 +4,6 @@
 	include_once('views/navbar.php');
 ?>
 
-<script type="text/javascript" src="js/movimientos.js"></script>
-
 <form class="p-3 mb-2 bg-dark text-white">
 	<div class="form-row">
 		<label>Busqueda</label>

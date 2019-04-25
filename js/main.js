@@ -67,8 +67,8 @@ function factura_venta()
 		data:'tabla_cant='+tabla_cant+'&tabla_id='+tabla_id+'&Descuento='+Descuento+'&id_prod='+id_prod+'&Cantidad='+Cantidad+'&fecha='+fecha+'&cliente='+cliente+'&dir='+dir+'&formapago='+formapago+'&tipo_factura='+tipo_factura+"&boton=factura"
 	}).done(function(resp){
 		if(resp > 0){
-			NumeroFactura = resp;
-			location.href='factura_ya.php';
+			NumeroFactura = resp - 1;
+			location.href='factura_ya.php?num='+NumeroFactura;
 		}else {
 			if(resp == 0){
 				alert("debe rellenar los cambos");
@@ -281,7 +281,6 @@ function mostrar_facturaCompra(num)
 function mostrar_facturaVenta(num)
 {
 	var num = num;
-	//alert(num);
 	$.ajax({
 		url:'php/cl_abm.php',
 		type:'POST',
@@ -316,7 +315,7 @@ function mostrar_facturaVenta(num)
 	$.ajax({
 	type: "POST",
 	url: 'php/cl_abm.php',
-	data: 'num='+num+"&boton=detalle_factura"
+	data: 'num='+num+"&boton=detalle_factura_ya"
 	}).done(function(resp){
 		datos = eval(resp);
 		var subtotal = 0;
@@ -596,7 +595,7 @@ function buscar()
 				var tipos = datos[i]["tipo_operacion"];
 				observacion = "";
 				listado += '<tr>'
-				listado += ' 		<td style="width:10%">'+datos[i]["Id"]+'</td>'
+				listado += ' 		<td style="width:10%">'+datos[i]["idFactura"]+'</td>'
 				listado += ' 		<td style="width:10%">'+datos[i]["NroComprobante"]+'</td>'
 				listado += ' 		<td style="width:10%">'+hora[0]+'</td>'
 				listado += ' 		<td style="width:10%">'+hora[1]+'</td>'
@@ -657,11 +656,11 @@ function observar(observ, listado){
 }
 
 function ver_factura(i){
-	NumeroFactura = datos[i]["Id"];
+	NumeroFactura = datos[i]["idFactura"];
 	location.href='facturaYaVenta.php?num='+NumeroFactura;
 }
 function ver_facturaCompra(i){
-	NumeroFactura = datos[i]["Id"];
+	NumeroFactura = datos[i]["idFactura"];
 	location.href='facturaYaCompra.php?num='+NumeroFactura;
 }
 

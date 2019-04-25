@@ -149,7 +149,6 @@ function buscar_cliente(){
 
 	var consulta = $('#cliente').val();
 	var boton = "buscar_cliente";
-
   $.ajax({
 		type: "POST",
 		url: 'php/altas_bajas.php',
@@ -170,11 +169,11 @@ function buscar_cliente(){
 	        listado += '		<td style="width:10%"> <a type="button" href="javascript:eliminar_cliente('+i+')">eliminar</a></td>'
 	        listado += '</tr>'
 	      }
-	      $('#resultado').html(listado);
+	      $('#busco_cliente').html(listado);
 			}else {
 				var listado = "";
 	      listado += '<div class="alert alert-danger" style="height:40px" role="alert"><b>Datos no Encontrados </b></div>'
-				$('#resultado').html(listado);
+				$('#busco_cliente').html(listado);
 			}
 	});
 }

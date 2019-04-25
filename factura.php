@@ -3,6 +3,7 @@
 	include_once('views/head.php');
 	include_once('views/navbar.php');
 ?>
+<!-- Busqueda de facutras -->
 <script type="text/javascript" src="js/ajaxListaFacturas.js"></script>
 <section id="factura">
 	<div class="col-xs-0 col-sm-0 col-md-0 col-lg-0 well">

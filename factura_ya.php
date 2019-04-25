@@ -4,6 +4,9 @@
 	include_once('views/head.php');
 	include_once('views/navbar.php');
 ?>
+
+<!-- Factura emergente pos venta -->
+
  <div align="center" style="width:60%" class="col-xs-50 col-sm-0 col-md-50 col-lg-0 well">
 	 <table id="numero1" style="width:100%" border="3">
 
