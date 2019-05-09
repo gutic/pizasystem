@@ -211,7 +211,7 @@ function mostrar_facturaCompra(num)
 	$.ajax({
 		url:'php/cl_abm.php',
 		type:'POST',
-		data: 'tipo='+2+'&num='+num+"&boton=factura_yaCompra"
+		data: 'num='+num+"&boton=factura_yaCompra"
 	}).done(function(resp){
 		data = eval(resp);
 		var listado = "";
@@ -242,7 +242,7 @@ function mostrar_facturaCompra(num)
 	$.ajax({
 	type: "POST",
 	url: 'php/cl_abm.php',
-	data: 'num='+num+"&boton=detalle_factura"
+	data: 'num='+num+"&boton=detalle_factura_compra"
 	}).done(function(resp){
 		datos = eval(resp);
 		var subtotal = 0;
@@ -284,7 +284,7 @@ function mostrar_facturaVenta(num)
 	$.ajax({
 		url:'php/cl_abm.php',
 		type:'POST',
-		data: 'tipo='+1+'&num='+num+"&boton=factura_yaVenta"
+		data: 'num='+num+"&boton=factura_yaVenta"
 	}).done(function(resp){
 		data = eval(resp);
 		var listado = "";
@@ -315,7 +315,7 @@ function mostrar_facturaVenta(num)
 	$.ajax({
 	type: "POST",
 	url: 'php/cl_abm.php',
-	data: 'num='+num+"&boton=detalle_factura_ya"
+	data: 'num='+num+"&boton=detalle_factura_venta"
 	}).done(function(resp){
 		datos = eval(resp);
 		var subtotal = 0;
@@ -349,6 +349,8 @@ function mostrar_facturaVenta(num)
 	});
 }
 
+//==================== CAJA ======================== //
+
 function extraer_dinero()
 {
 	if(validarCaja()){
@@ -358,11 +360,11 @@ function extraer_dinero()
 			url: "php/cl_abm.php",
 			data: "boton=extraer_dinero&"+data_form
 			}).done(function( msg ) {
-					alert(msg);
-					limpiar();
+					alertify.success(msg);
+					limpiar_caja();
 			});
 		}else{
-	    alert("Complete todos los datos");
+	    alertify.error("Complete todos los datos");
 	  }
 }
 
@@ -375,18 +377,26 @@ function ingreso_dinero()
 			url: "php/cl_abm.php",
 			data: "boton=ingreso_dinero&"+data_form
 			}).done(function( msg ) {
-					alert(msg);
-					limpiar();
+					alertify.success(msg);
+					limpiar_caja();
 			});
 		}else{
-	    alert("Complete todos los datos");
+	    alertify.error("Complete todos los datos");
 	  }
 }
 
-
 function validarCaja(){
-	if($.trim($("[name='dinero']").val()) == "")return false;
+	if($.trim($("[name='dinero']").val()) == "" ||
+	$.trim($("[name='observacion']").val()) == "" )return false;
 	return true;
+}
+
+function limpiar_caja()
+{
+	$('#dinero').val("");//limpiar formulario (todos los  type="text")
+	$('#observacion').val("");//loimpiar select de los formulario
+	// $('#fecha1').val(fecha2);
+
 }
 
 //_______________________desde - hasta ____________________//
@@ -407,6 +417,8 @@ function movimientos_caja(){
 			url: "php/cl_abm.php",
 			data: "boton=movimientos_caja&"+data_form
 		}).done(function(msg){
+
+
 			egreso = 0;
 			salida_caja = 0;
 			ingreso = 0;
@@ -590,66 +602,113 @@ function buscar()
 			listado += '<td style="width:10%"><b>Saldo</b></td>'
 			listado += '</tr>'
 			for(var i=0;i<datos.length;i++){
-				var hora = datos[i]["Fecha"];
-				hora = hora.split(" ");
 				var tipos = datos[i]["tipo_operacion"];
-				observacion = "";
-				listado += '<tr>'
-				listado += ' 		<td style="width:10%">'+datos[i]["idFactura"]+'</td>'
-				listado += ' 		<td style="width:10%">'+datos[i]["NroComprobante"]+'</td>'
-				listado += ' 		<td style="width:10%">'+hora[0]+'</td>'
-				listado += ' 		<td style="width:10%">'+hora[1]+'</td>'
-				listado += ' 		<td style="width:10%">'+datos[i]["Usuario"]+'</td>'
-
-				id = datos[i]["Id"];
-
-				if(tipos == 4 || tipos == 3){
-			   	accion = "detalle";
-					var observ = "";
-					$.ajax({
-						type: "POST",
-						url: 'php/busco_mov.php',
-						data: {tipos : tipos, id : id, boton : accion}
-					}).done(function(respuesta){
-						datos2 = eval(respuesta);
-						observ = datos2[0]["observacion"];
-
-					});
-					listado +=' 		<td style="width:10%">'+datos[i]["observacion"]+'</td>'
-				}else{
-					if(tipos == 1){
-						listado +=' <td style="width:10%"> <a type="button" href="javascript:ver_factura('+i+')">Ver Factura</a></td>'
+				if(tipos != 5){
+					var hora = datos[i]["Fecha"];
+					hora = hora.split(" ");
+					observacion = "";
+					listado += '<tr>'
+					listado += ' 		<td style="width:10%">'+datos[i]["idFactura"]+'</td>'
+					listado += ' 		<td style="width:10%">'+datos[i]["NroComprobante"]+'</td>'
+					listado += ' 		<td style="width:10%">'+hora[0]+'</td>'
+					listado += ' 		<td style="width:10%">'+hora[1]+'</td>'
+					listado += ' 		<td style="width:10%">'+datos[i]["Usuario"]+'</td>'
+					id = datos[i]["Id"];
+					if(tipos == 4 || tipos == 3){
+						accion = "detalle";
+						var observ = "";
+						$.ajax({
+							type: "POST",
+							url: 'php/busco_mov.php',
+							data: {tipos : tipos, id : id, boton : accion}
+						}).done(function(respuesta){
+							datos2 = eval(respuesta);
+							observ = datos2[0]["observacion"];
+						});
+						listado +=' 		<td style="width:10%">'+datos[i]["observacion"]+'</td>'
 					}else{
-						listado +=' <td style="width:10%"> <a type="button" href="javascript:ver_facturaCompra('+i+')">Ver Factura</a></td>'
+						if(tipos == 1){
+							listado +=' <td style="width:10%"> <a type="button" href="javascript:ver_factura('+i+')">Ver Factura</a></td>'
+						}else{
+							listado +=' <td style="width:10%"> <a type="button" href="javascript:ver_facturaCompra('+i+')">Ver Factura</a></td>'
+						}
 					}
+					var total = parseFloat(datos[i]["total"]-datos[i]["Descuento"]);
+					if(tipos == 1 || tipos == 4){
+						saldo = total + saldo;
+						listado += '	<td style="width:10%">'+total.toFixed(2)+'</td>'
+						listado += '	<td style="width:10%">_____________</td>'
+					}
+					if(tipos == 2 || tipos == 3){
+						saldo = saldo - total ;
+						listado += '	<td style="width:10%">_____________</td>'
+						listado += '	<td style="width:10%">'+total.toFixed(2)+'</td>'
+					}
+					listado += '	<td style="width:10%">'+saldo.toFixed(2)+'</td>'
+					listado += '</tr>'
+				}else{
+					saldo += datos[i]['anterior'];
+					listado += '<tr> <td> </td> <td> </td> <td> </td>  <td> <div class="alert alert-danger" style="height:80px" style="width:100%" role="alert"><b>Saldo Anterior = '+datos[i]['anterior'].toFixed(2)+'</b></div></td><td> <div class="alert alert-danger" style="height:80px" style="width:100%" role="alert"><b>Total = '+saldo.toFixed(2)+'</b></div> </tr>'
 
 				}
-				var total = parseFloat(datos[i]["total"]-datos[i]["Descuento"]);
 
-
-				if(tipos == 1 || tipos == 4){
-					saldo = total + saldo;
-					listado += '	<td style="width:10%">'+total.toFixed(2)+'</td>'
-					listado += '	<td style="width:10%">_____________</td>'
-				}
-				if(tipos == 2 || tipos == 3){
-					saldo = saldo - total ;
-					listado += '	<td style="width:10%">_____________</td>'
-					listado += '	<td style="width:10%">'+total.toFixed(2)+'</td>'
-				}
-				listado += '	<td style="width:10%">'+saldo.toFixed(2)+'</td>'
-				listado += '</tr>'
 			}
 
-			$('#resultado').html(listado);
+
+
+			$('#todos_movimientos').html(listado);
 
 		} else {
 				var listado = "";
 				listado += '<div class="alert alert-danger" style="height:40px" role="alert"><b>Datos no Encontrados </b></div>'
-				$('#resultado').html(listado);
+				$('#todos_movimientos').html(listado);
 		}
 	});
+
 }
+
+//=============DATA TABLE =====================
+
+function cliente_producto(){
+	var desde = $('#fecha1').val();
+	var hasta = $('#fecha2').val();
+
+	var table = $("#cliente_producto").DataTable({
+		destroy: true,
+		responsive: true,
+		"ajax":{
+			"method":"POST",
+			"url":"php/busco_mov.php",
+			"data": {
+				"boton":"cliente_producto"
+			},
+			fixedHeader: true,
+			dataSrc:"",
+		},
+		"columns":[
+			{"data":"Fecha"},
+			{"data":"Cantidad"},
+			{"data":"NombreProducto"},
+			{"data":"Nombre"},
+		]
+	});
+
+}
+
+
+
+function limpiar_tabla1(){
+	table.destroy();
+	// listado += ''
+	// $('#todos_movimientos').html(listado);
+}
+
+function limpiar_tabla2(){
+	listado += ''
+	$('#cliente_producto').html(listado);
+}
+
+
 function observar(observ, listado){
 
 	listado +=' 		<td style="width:10%">HOLA</td>'

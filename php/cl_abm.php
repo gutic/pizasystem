@@ -1,7 +1,5 @@
 <?php
   require("../config/config.php");
-  //extiende de la clase mysql asi no tngo q instanciarla
-  //la clase mysql conecta a la base
     session_start();
     $usuario = $_SESSION['Id'];
     $boton=$_POST['boton'];
@@ -193,28 +191,18 @@
         }
         echo json_encode($data);
         break;
-        //FACTURA AL COMPRAR ___________________________________________________
-      case 'factura_yaCompra':
-          $tipo = $_POST['tipo'];
+    ///================================//Buscardor factura ventas.-=====================================//
+      case 'factura_yaVenta':
           $num = $_POST['num'];
-          if ($num == 0){
-            $ulti = ulti_factura($tipo);
-            $ulti -= 1;
-          }else{
-            $ulti = $num;
-          }
-
-          if($tipo == 1){
-            $registros=mysqli_query($conexion,"SELECT * FROM Factura WHERE id_compra = '$ulti' AND tipo_operacion = '$tipo';") or
-                die("Problemas en el select:".mysqli_error($conexion));
-          }
+          $registros=mysqli_query($conexion,"SELECT * FROM Factura WHERE Id = '$num';") or
+                 die("Problemas en el select:".mysqli_error($conexion));
           if($reg_factura=mysqli_fetch_array($registros))
           {
             $registros=mysqli_query($conexion,"SELECT * FROM Persona WHERE Id = '$reg_factura[6]';") or
               die("Problemas en el select:".mysqli_error($conexion));
             $reg_persona=mysqli_fetch_array($registros);
 
-            $registros=mysqli_query($conexion,"SELECT * FROM DetalleFactura WHERE NroComprobante = '$ulti' AND tipo_operacion = '$tipo';") or
+            $registros=mysqli_query($conexion,"SELECT * FROM DetalleFactura WHERE NroComprobante = '$reg_factura[7]';") or
               die("Problemas en el select:".mysqli_error($conexion));
             $reg_detalle=mysqli_fetch_array($registros);
 
@@ -222,55 +210,68 @@
               die("Problemas en el select:".mysqli_error($conexion));
             $reg_prod =mysqli_fetch_array($registros);
 
-            $datos[] = array("tipo" => $reg_factura[4], "numero" => $ulti, "fecha" => $reg_factura[8], "formapago" => $reg_factura[5],
-              "nombre_persona" => $reg_persona[2], "cuit_persona" => $reg_persona[5], "direccion" => $reg_persona[4], "cuit" => $reg_persona[5], "cantidad" => $reg_detalle[3], "precio" => $reg_detalle[4], "nombre_producto" => $reg_prod[0],
+            $datos[] = array("tipo" => $reg_factura[4], "numero" => $reg_factura[7], "fecha" => $reg_factura[8], "formapago" => $reg_factura[5],
+              "nombre_persona" => $reg_persona[2], "cuit_persona" => $reg_persona[5], "direccion" => $reg_persona[4], "cuit" => $reg_persona[5],
+              "cantidad" => $reg_detalle[3], "precio" => $reg_detalle[4], "nombre_producto" => $reg_prod[0],
               "forma_pago" => $reg_factura[5], "direccion_emision" => $reg_factura[11]);
             echo json_encode($datos);
           }else{
             echo FALSE;
           }
           break;
+        case 'detalle_factura_venta':
+          $num = $_POST['num'];
+          $result=mysqli_query($conexion,"SELECT df.*, pr.*, fa.* FROM DetalleFactura df INNER JOIN Producto pr INNER JOIN Factura fa
+            WHERE fa.Id = '$num' AND df.tipo_operacion = 1 AND fa.NroComprobante = df.NroComprobante AND df.IdProducto = pr.Id;") or
+            die("Problemas en el select:".mysqli_error($conexion));
+          while( $reg = mysqli_fetch_assoc($result)){
+            $data[] = $reg;
+          }
+          echo json_encode($data);
+          break;
 
-      case 'factura_yaVenta':
-            $tipo = $_POST['tipo'];
-            $num = $_POST['num'];
-            $registros=mysqli_query($conexion,"SELECT * FROM Factura WHERE Id = '$num';") or
-                   die("Problemas en el select:".mysqli_error($conexion));
 
-            if($reg_factura=mysqli_fetch_array($registros))
-            {
-              $registros=mysqli_query($conexion,"SELECT * FROM Persona WHERE Id = '$reg_factura[6]';") or
+        //FACTURA AL COMPRAR ___________________________________________________
+      case 'factura_yaCompra':
+          $num = $_POST['num'];
+          $registros=mysqli_query($conexion,"SELECT * FROM Factura WHERE Id = '$num';") or
                 die("Problemas en el select:".mysqli_error($conexion));
-              $reg_persona=mysqli_fetch_array($registros);
+          if($reg_factura=mysqli_fetch_array($registros))
+          {
+            $registros=mysqli_query($conexion,"SELECT * FROM Persona WHERE Id = '$reg_factura[6]';") or
+              die("Problemas en el select:".mysqli_error($conexion));
+            $reg_persona=mysqli_fetch_array($registros);
 
-              $registros=mysqli_query($conexion,"SELECT * FROM DetalleFactura WHERE NroComprobante = '$reg_factura[7]';") or
-                die("Problemas en el select:".mysqli_error($conexion));
-              $reg_detalle=mysqli_fetch_array($registros);
+            $registros=mysqli_query($conexion,"SELECT * FROM DetalleFactura WHERE NroComprobante = '$reg_factura[1]';") or
+              die("Problemas en el select:".mysqli_error($conexion));
+            $reg_detalle=mysqli_fetch_array($registros);
 
-              $registros=mysqli_query($conexion,"SELECT NombreProducto FROM Producto WHERE Id = '$reg_detalle[2]';") or
-                die("Problemas en el select:".mysqli_error($conexion));
-              $reg_prod =mysqli_fetch_array($registros);
+            $registros=mysqli_query($conexion,"SELECT NombreProducto FROM Producto WHERE Id = '$reg_detalle[2]';") or
+              die("Problemas en el select:".mysqli_error($conexion));
+            $reg_prod =mysqli_fetch_array($registros);
 
-              $datos[] = array("tipo" => $reg_factura[4], "numero" => $reg_factura[7], "fecha" => $reg_factura[8], "formapago" => $reg_factura[5],
-                "nombre_persona" => $reg_persona[2], "cuit_persona" => $reg_persona[5], "direccion" => $reg_persona[4], "cuit" => $reg_persona[5],
-                "cantidad" => $reg_detalle[3], "precio" => $reg_detalle[4], "nombre_producto" => $reg_prod[0],
-                "forma_pago" => $reg_factura[5], "direccion_emision" => $reg_factura[11]);
-              echo json_encode($datos);
-            }else{
-              echo FALSE;
-            }
-            break;
-
-      case 'detalle_factura_ya':
+            $datos[] = array("tipo" => $reg_factura[4], "numero" => $reg_factura[1], "fecha" => $reg_factura[8], "formapago" => $reg_factura[5],
+              "nombre_persona" => $reg_persona[2], "cuit_persona" => $reg_persona[5], "direccion" => $reg_persona[4], "cuit" => $reg_persona[5],
+              "Cantidad" => $reg_detalle[3], "precio" => $reg_detalle[4], "nombre_producto" => $reg_prod[0],
+              "forma_pago" => $reg_factura[5], "direccion_emision" => $reg_factura[11]);
+            echo json_encode($datos);
+          }else{
+            echo FALSE;
+          }
+          break;
+      case 'detalle_factura_compra':
         $num = $_POST['num'];
         $result=mysqli_query($conexion,"SELECT df.*, pr.*, fa.* FROM DetalleFactura df INNER JOIN Producto pr INNER JOIN Factura fa
-          WHERE fa.Id = '$num' AND df.tipo_operacion = 1 AND fa.NroComprobante = df.NroComprobante AND df.IdProducto = pr.Id;") or
+          WHERE fa.Id = '$num' AND df.tipo_operacion = 2 AND fa.id_compra = df.NroComprobante AND df.IdProducto = pr.Id;") or
           die("Problemas en el select:".mysqli_error($conexion));
         while( $reg = mysqli_fetch_assoc($result)){
           $data[] = $reg;
         }
         echo json_encode($data);
         break;
+
+
+
       case 'extraer_dinero':
         $dinero = $_POST['dinero'];
         $observacion = $_POST['observacion'];
