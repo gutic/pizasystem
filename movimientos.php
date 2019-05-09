@@ -4,6 +4,7 @@
 	include_once('views/navbar.php');
 ?>
 
+
 <form class="p-3 mb-2 bg-dark text-white">
 	<div class="form-row">
 		<label>Busqueda</label>
@@ -30,26 +31,73 @@
 			</div>
 			<div class="form-group col-md-4">
 				<button type="button" class="btn btn-default" onclick="buscar();">Buscar</button>
+				<button type="button" class="btn btn-default" onclick="limpiar_tabla1();">borrar</button>
 			</div>
 		</div>
 
 
-	<table style="width:100%" id="resultado" border="1">
+	<table style="width:100%" id="todos_movimientos" border="1">
 
 	</table>
 
+</form>
 
-		<div id="resultado">
+<br>
+<br>
+<br>
+
+
+<form class="p-3 mb-2 bg-dark text-white">
+	<div class="form-row">
+		<label>Busqueda</label>
+	</div>
+	<form class="p-3 mb-2 bg-dark">
+
+		<div class="form-row">
+			<label>Busqueda</label>
+		</div>
+
+		<div class="form-row">
+				<div class="form-group col-md-4">
+					<button type="button" class="btn btn-default" onclick="cliente_producto();">Buscar</button>
+					<button type="button" class="btn btn-default" onclick="limpiar_tabla2();">borrar</button>
+				</div>
+	    	<section class="content">
+	    		<div class="row">
+	    			<div class="col-xs-12">
+	    				<div class="box">
+	    					<div class="box-header">
+	    						<h3 class="box-title">Movimientos</h3>
+	    					</div>
+	    					<!-- /.box-header -->
+	    					<div class="box-body">
+	    						<table id="cliente_producto" class="p-3 mb-4 bg-dark text-white" border="1" style="width:100%">
+										<thead>
+	    								<tr>
+	    									<th>Fecha</th>
+	    									<th>Cantidad</th>
+	    									<th>Prodcuto</th>
+	    									<th>Cliente</th>
+	    								</tr>
+	    							</thead>
+
+	    						</table>
+	    					</div>
+	    					<!-- /.box-body -->
+	    				</div>
+	    			</div>
+	    			<!-- /.col -->
+	    		</div>
+	    		<!-- /.row -->
+	    	</section>
+
+	    </div>
+	</form>
 
 </form>
 
-		<br>
-		<br>
-		<div id="total">
 
-		</div>
 
-	</form>
 <?php
   	include_once('views/footer.php');
 ?>

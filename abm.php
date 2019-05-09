@@ -45,7 +45,7 @@
 							<table>
 								<tr>
 									<td><b>Nombre o cod Provedor:</b></td>
-									<td><input type="text" name="prove" id="prove" onchange="buscar_prove()" ></td> <!--cliente -->
+									<td><input type="text" name="prove" id="prove" onchange="buscar_prove();" ></td> <!--cliente -->
 									<td><input type="button" value="Buscar Proveedor"  onclick="buscar_prove();" /></td>
 								</tr>
 							</table>

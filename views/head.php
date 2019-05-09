@@ -21,5 +21,16 @@
 	<link rel="stylesheet" type="text/css" href="css/bootstrap-theme.css">
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 
+	<!-- DataTables -->
+	<script type="text/javascript" src="datatable/datatables.min.js"></script>
+	<link rel="stylesheet" href="datatables.net-bs/css/dataTables.bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="datatable/datatables.min.css"/>
+
+	<!--datables estilo bootstrap 4 CSS-->
+	<link rel="stylesheet"  type="text/css" href="datatable/DataTables-1.10.18/css/dataTables.bootstrap4.min.css">
+
+	<link rel="stylesheet" type="text/css" href="datatable/FixedHeader-3.1.4/css/fixedHeader.dataTables.min.css"/>
+ 	<script type="text/javascript" src="datatable/FixedHeader-3.1.4/js/dataTables.fixedHeader.min.js"></script>
+
 </head>
 <body>
