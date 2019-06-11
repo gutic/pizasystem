@@ -36,7 +36,10 @@
 		</div>
 
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 20675371b128817b210675a100db4e4629a95cd8
 	<table style="width:100%" id="todos_movimientos" border="1">
 
 	</table>
@@ -72,7 +75,11 @@
 	    					</div>
 	    					<!-- /.box-header -->
 	    					<div class="box-body">
+<<<<<<< HEAD
 	    						<table id="cliente_producto" class="datatables" border="1" style="width:100%">
+=======
+	    						<table id="cliente_producto" class="p-3 mb-4 bg-dark text-white" border="1" style="width:100%">
+>>>>>>> 20675371b128817b210675a100db4e4629a95cd8
 										<thead>
 	    								<tr>
 	    									<th>Fecha</th>
