@@ -142,11 +142,7 @@ $boton = $_POST['boton'];
       }
     break;
     case 'cliente_producto':
-<<<<<<< HEAD
       $query = "SELECT date_format(fac.Fecha,'%d/%m/%Y') as Fecha, det.Cantidad, pr.NombreProducto, per.Nombre
-=======
-      $query = "SELECT fac.Fecha, det.Cantidad, pr.NombreProducto, per.Nombre
->>>>>>> 20675371b128817b210675a100db4e4629a95cd8
       FROM Factura as fac, DetalleFactura as det, Persona as per, Producto as pr
       WHERE fac.NroComprobante = det.NroComprobante AND det.IdProducto = pr.Id AND fac.Persona = per.Id AND det.IdProducto = pr.Id";
       $resultado = $conexion -> query($query);

@@ -648,15 +648,9 @@ function buscar()
 					listado += '	<td style="width:10%">'+saldo.toFixed(2)+'</td>'
 					listado += '</tr>'
 				}else{
-<<<<<<< HEAD
 					saldo += datos[i]['anterior'];
 					listado += '<tr> <td> </td> <td> </td> <td> </td>  <td> <div class="alert alert-danger" style="height:80px" style="width:100%" role="alert"><b>Saldo Anterior = '+datos[i]['anterior'].toFixed(2)+'</b></div></td><td> <div class="alert alert-danger" style="height:80px" style="width:100%" role="alert"><b>Total = '+saldo.toFixed(2)+'</b></div> </tr>'
 
-=======
-					listado += '<tr> <td> </td> <td> </td> <td> </td>  <td> <div class="alert alert-danger" style="height:80px" style="width:100%" role="alert"><b>Saldo Anterior = '+datos[i]['anterior']+'</b></div></td> </tr>'
-					saldo += datos[i]['anterior'];
-					listado += '<tr> <td> </td> <td> </td><td> </td><td> </td><td> </td> <td> </td> <td> </td>  <td> <div class="alert alert-danger" style="height:80px" style="width:100%" role="alert"><b>Total = '+saldo.toFixed(2)+'</b></div></td> </tr>'
->>>>>>> 20675371b128817b210675a100db4e4629a95cd8
 				}
 
 			}
