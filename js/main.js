@@ -670,8 +670,9 @@ function buscar()
 
 //=============DATA TABLE =====================
 
+
 function cliente_producto(){
-	var desde = $('#fecha1').val();
+	/* var desde = $('#fecha1').val();
 	var hasta = $('#fecha2').val();
 
 	var table = $("#cliente_producto").DataTable({
@@ -692,11 +693,33 @@ function cliente_producto(){
 			{"data":"NombreProducto"},
 			{"data":"Nombre"},
 		]
-	});
+	}); */
 
+	$.ajax({
+		type: "POST",
+		data: {
+			"boton":"cliente_producto",
+			// "id_loc_origen": 1,
+			// "id_loc_destino": 28,
+			// "fecha": "2019-05-21"
+		},
+		url: "php/busco_mov.php",
+		dataType: "json",
+		cache: false,
+		success: function(resp) {
+			console.log(resp);
+			var table = $("#cliente_producto").DataTable();
+			for (var i = 0; i < resp.length; i++) {
+				table.row.add([resp[i].Fecha, resp[i].Cantidad, resp[i].NombreProducto, resp[i].Nombre, '<button onclick=test('+resp[i].factura+')>Ver Factura</button>']).draw();
+			}
+		}
+	});
 }
 
-
+function test(i){
+	NumeroFactura = i;
+	window.open('facturaYaVenta.php?num='+NumeroFactura, '_blank');
+}
 
 function limpiar_tabla1(){
 	table.destroy();
@@ -716,6 +739,7 @@ function observar(observ, listado){
 }
 
 function ver_factura(i){
+	//alert(i);
 	NumeroFactura = datos[i]["idFactura"];
 	location.href='facturaYaVenta.php?num='+NumeroFactura;
 }

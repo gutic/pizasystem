@@ -79,6 +79,7 @@
 	    									<th>Cantidad</th>
 	    									<th>Prodcuto</th>
 	    									<th>Cliente</th>
+												<th>Ver Factura</th>
 	    								</tr>
 	    							</thead>
 
