@@ -246,6 +246,8 @@
               die("Problemas en el select:".mysqli_error($conexion));
             $reg_detalle=mysqli_fetch_array($registros);
 
+            //retornar if(observacion=="insumo" || observacion=="producto")
+
             $registros=mysqli_query($conexion,"SELECT NombreProducto FROM Producto WHERE Id = '$reg_detalle[2]';") or
               die("Problemas en el select:".mysqli_error($conexion));
             $reg_prod =mysqli_fetch_array($registros);

@@ -207,7 +207,6 @@ function mostrar_factura(num)
 function mostrar_facturaCompra(num)
 {
 	var num = num;
-	//alert(num);
 	$.ajax({
 		url:'php/cl_abm.php',
 		type:'POST',
@@ -588,7 +587,6 @@ function buscar()
 		url: 'php/busco_mov.php',
 		data: {tipo : tipo, boton : accion, desde : desde, hasta : hasta}
 	}).done(function(resp){
-		console.log(resp);
 		datos = eval(resp);
 		if (datos != 0){
 			listado += '<tr>'

@@ -10,9 +10,10 @@ function factura_compraProducto()
 		if(resp > 0){
 			NumeroFactura = resp;
 			limpiar();
+			alertify.succes("Compra Producto Ok");
 		}else {
 			if(resp == 0){
-				alert("debe rellenar los cambos");
+				alertify.error("debe rellenar los cambos");
 			};
 		};
 	});
@@ -29,9 +30,10 @@ function factura_compraInsumo()
 		if(resp > 0){
 			NumeroFactura = resp;
 			limpiar();
+			alertify.succes("Compra Insumo Ok");
 		}else {
 			if(resp == 0){
-				alert("debe rellenar los cambos");
+				alertify.error("debe rellenar los cambos");
 			};
 		};
 	});
