@@ -4,6 +4,7 @@
 	include_once('views/head.php');
 	include_once('views/navbar.php');
 ?>
+<section id="factura">
  <div align="center" style="width:60%" class="col-xs-50 col-sm-0 col-md-50 col-lg-0 well">
 	 <table id="numero1" style="width:100%" border="3">
 
@@ -54,11 +55,12 @@
 	<br>
 	<div class="col-xs-100 col-sm-12 col-md-12 col-lg-100" id="mensaje" align="center"></div>
 </div>
-
+</section>
 	<a valign="center" href="venta_factura.php">Volver Menu venta</a>
 	<script type="text/javascript">
 	// funcion que se inicia luego de cargar la pagina
 	$(function () {
+		location.href="#factura";
 		'<?php $num = $_GET['num']; ?>';
 		var num = '<?php echo $num; ?>';
 		mostrar_facturaVenta(num);

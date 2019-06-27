@@ -433,7 +433,7 @@ function buscar_receta(){
 		        listado += ' 		<td style="width:70%">'+datos[i]["NombreProducto"]+'</td>'
 		        listado += ' 		<td style="width:10%">'+datos[i]["CostoProducto"]+'</td>'
 		        listado += '		<td style="width:10%"> <a type="button" href="javascript:editar_receta('+i+')">editar</a></td>'
-		        listado += '		<td style="width:10%"> <a type="button" href="javascript:eliminar_receta('+i+')">eliminar</a></td>'
+		        listado += '		<td style="width:10%"> <a class="btn btn-danger btn-sm" type="button" href="javascript:eliminar_receta('+i+')">eliminar</a></td>'
 		        listado += '</tr>'
 		      }
 		      $('#busco_receta').html(listado);
@@ -451,7 +451,12 @@ function editar_receta(i){
 	listado = "";
 	listado += '<a>'+datos[i]["NombreProducto"]+'</a>'
 	$('#editando').html(listado);
-	alert("Agregue o quite insumos. Cambie de nombre o precio");
+	alertify.success("Agregue o quite insumos. Cambie de nombre o precio");
+	listado = "";
+	listado += '<tr>'
+	listado += ' 		<td style="width:100%"><div class="alert alert-success" role="alert"><b>Busqueda de insumos</b></div></td>'
+	listado += '</tr>'
+	$("#resultado_busqueda_insumo").html(listado);
   buscar_insunmo_de_receta();
 }
 function buscar_datos_insumo(){
@@ -472,23 +477,28 @@ function buscar_datos_insumo(){
 };
 
 function agregar_insumo_receta(id_insumo){
-
-	if (id_editar > 0) {
-		if (id_insumo >  0){
-			$.ajax({
-				type: "POST",
-				url: "php/altas_bajas.php",
-				data: "id_insumo="+id_insumo+"&id_editar="+id_editar+"&boton=agregar_insumo_receta"
-				}).done(function( msg ) {
-					alert(msg);
-  				buscar_insunmo_de_receta();
-				});
+	var consume = $('#consume').val();
+	if(consume > 0){
+		if (id_editar > 0) {
+			if (id_insumo >  0){
+				$.ajax({
+					type: "POST",
+					url: "php/altas_bajas.php",
+					data: "id_insumo="+id_insumo+"&id_editar="+id_editar+"&consume="+consume+"&boton=agregar_insumo_receta"
+					}).done(function( msg ) {
+						alert(msg);
+						buscar_insunmo_de_receta();
+					});
+			}else {
+				alertify.error("debe elegir un insumo");
+			}
 		}else {
-			alert("debe elegir un insumo");
+			alertify.error("debe elegir una receta");
 		}
-	}else {
-		alert("debe elegir una receta");
+	}else{
+		alertify.error("Ingrese un consumo mayor a cero");
 	}
+
 }
 function buscar_insunmo_de_receta(){
 	$.ajax({
@@ -504,13 +514,23 @@ function buscar_insunmo_de_receta(){
 		      for(var i=0;i<insumo.length;i++){
 		        var bgcolor = (i%2==0) ? "#FFFFFF":"#EDEDED";
 		        listado += '<tr>'
-		        listado += ' 		<td style="width:23%">'+insumo[i]["Nombre"]+'</td>'
-		        listado += '		<td style="width:10%"> <a type="button" href="javascript:eliminar_insumo_receta('+i+')">eliminar</a></td>'
+		        listado += ' 		<td style="width:80%">'+insumo[i]["Nombre"]+'</td>'
+						listado += ' 		<td style="width:10%">'+insumo[i]["consume"]+'</td>'
+		        listado += '		<td style="width:10%"> <a class="btn btn-danger btn-sm" type="button" href="javascript:eliminar_insumo_receta('+i+')">eliminar</a></td>'
 		        listado += '</tr>'
 		      }
 		      $('#busco_insumo_receta').html(listado);
 				}else {
-					alert("No hay registros");
+					listado += '<tr>'
+					listado += ' 		<td style="width:100%"><div class="alert alert-danger" role="alert"><b>Receta sin insumos, agregue algunos para armar el producto</b></div></td>'
+					listado += '</tr>'
+					$('#busco_insumo_receta').html(listado);
+					listado = "";
+					listado += '<tr>'
+					listado += ' 		<td style="width:100%"><div class="alert alert-danger" role="alert"><b>Receta sin insumos, agregue algunos para armar el producto</b></div></td>'
+					listado += '</tr>'
+					$("#resultado_busqueda_insumo").html(listado);
+
 				}
 	});
 }
@@ -518,7 +538,7 @@ function eliminar_insumo_receta(i){
   var statusConfirm = confirm("¿Realmente desea eliminar este Insumo?");
     if (statusConfirm == true)
       {
-        alert ("Eliminado");
+        alertify.success("Eliminado");
         var eliminar = insumo[i]["Id_insumo"];
         $.ajax({
         type: "POST",
@@ -533,7 +553,30 @@ function eliminar_insumo_receta(i){
         alert("No se eliminó");
       }
 }
+
+function eliminar_receta(i){
+  var statusConfirm = confirm("¿Realmente desea eliminar este Insumo?");
+    if (statusConfirm == true)
+      {
+        alert ("Eliminado");
+        var eliminar = datos[i]["Id"];
+        $.ajax({
+        type: "POST",
+        url: "php/altas_bajas.php",
+        data: "id="+eliminar+"&boton=del_receta"
+        }).done(function( msg ) {
+            limpiar();
+            buscar_receta();
+        });
+      }
+    else
+      {
+        alertify.success("No se eliminó");
+      }
+}
+
 //_______________________________________USUARIO__________________________________________
+
 function validarDatosUsuario(){
 	if($.trim($("[name='nombre']").val()) == "")return false;
 	return true;

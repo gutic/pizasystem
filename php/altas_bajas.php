@@ -174,7 +174,11 @@
       mysqli_query($conexion,"UPDATE Producto SET activo = '0' WHERE Id = '$id';") or
       die("Problemas en el delete:".mysqli_error($conexion));
       break;
-     //_________PRODUCTO ELABORADO / RECETAS_________________ //
+
+
+     //_________PRODUCTO ELABORADO / RECETAS______________=======================================//___ //
+
+
     case 'buscar_receta':
       $consulta = $_POST['consulta'];
       //si no pone nada tomo todo
@@ -208,7 +212,8 @@
     case 'agregar_insumo_receta':
       $id_insumo = $_POST["id_insumo"];
       $id_prod = $_POST["id_editar"];
-      mysqli_query($conexion,"INSERT INTO Receta(Id_insumo, Id_producto) VALUES ('$id_insumo','$id_prod');") or
+      $consume = $_POST['consume'];
+      mysqli_query($conexion,"INSERT INTO Receta(Id_insumo, Id_producto, consume) VALUES ('$id_insumo','$id_prod','$consume');") or
       die("Problemas en el insert new receta:".mysqli_error($conexion));
       echo "ok";
       break;
@@ -245,10 +250,10 @@
       }
       $resultado = $conexion -> query($query);
       if($resultado->num_rows > 0){
-        $salida .= "<table class='tabla_datos' border='2'>
+        $salida .= "<table class='tabla_datos' border='2' style='width:80%'>
                 <thead>
                   <tr>
-                    <td>Insumos</td>
+                    <td style='width:40%'>Insumos</td>
                   </tr>
                 </thead>
                 <tbody>";
@@ -257,18 +262,31 @@
         while($fila = $resultado -> fetch_assoc()){
             $name[$x] = $fila['Nombre'];
             $salida.="<tr>
-                <td>".$fila['Nombre']."</td>
+                <td style='width:80%'>".$fila['Nombre']."</td>
                 <td><a class='btn btn-success btn-sm'  onclick='agregar_insumo_receta(".$fila['Id_insumo'].");'>Agregar</a></td>
             </tr>";
             $x +=1;
         }
+        $salida.="<tr>
+        <td style='width:5%' class='bg-danger' >Consumo</td>
+        <td style='width:80%'><input type='number' id='consume' value='0'></td>
+        </tr>";
         $salida.="</tbody></table>";
       }else{
         $salida.= "<div class='alert alert-danger' role='alert'><b>Datos no Encontrados !!!</b></div>";
       }
       echo $salida;
       break;
-  //ABM usuarios //
+    case 'del_receta':
+      $id = $_POST["id"];
+      mysqli_query($conexion,"UPDATE Producto SET activo = '0' WHERE Id = '$id';") or
+      die("Problemas en el delete:".mysqli_error($conexion));
+      break;
+
+  //========================ABM usuarios=========================================//
+
+
+
     case 'insertar_usuario':
       $nombre = $_POST["nombre"];
       $contrasena = $_POST["contrasena"];

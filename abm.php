@@ -321,8 +321,9 @@
 						 </div>
 		 				 <table style="width:100%" border="2">
 		 					 <tr>
-		 						 <td style="width:60%"><b>nombre Insumo:</b></td>
-								 <td style="width:20%"><b>Eliminar:</b></td>
+		 						 <td style="width:80%"><b>nombre Insumo:</b></td>
+								 <td style="width:10%"><b>Consume:</b></td>
+								 <td style="width:10%"><b>Eliminar:</b></td>
 		 					 </tr>
 		 				 	</table>
 		 				 <table id="busco_insumo_receta">

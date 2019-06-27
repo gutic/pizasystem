@@ -627,9 +627,9 @@ function buscar()
 						listado +=' 		<td style="width:10%">'+datos[i]["observacion"]+'</td>'
 					}else{
 						if(tipos == 1){
-							listado +=' <td style="width:10%"> <a type="button" href="javascript:ver_factura('+i+')">Ver Factura</a></td>'
+							listado +=' <td style="width:10%"> <a class="btn btn-success btn-sm" type="button" href="javascript:ver_factura('+i+')">Ver Factura</a></td>'
 						}else{
-							listado +=' <td style="width:10%"> <a type="button" href="javascript:ver_facturaCompra('+i+')">Ver Factura</a></td>'
+							listado +=' <td style="width:10%"> <a class="btn btn-success btn-sm" type="button" href="javascript:ver_facturaCompra('+i+')">Ver Factura</a></td>'
 						}
 					}
 					var total = parseFloat(datos[i]["total"]-datos[i]["Descuento"]);
@@ -670,28 +670,6 @@ function buscar()
 
 
 function cliente_producto(){
-	/* var desde = $('#fecha1').val();
-	var hasta = $('#fecha2').val();
-
-	var table = $("#cliente_producto").DataTable({
-		destroy: true,
-		responsive: true,
-		"ajax":{
-			"method":"POST",
-			"url":"php/busco_mov.php",
-			"data": {
-				"boton":"cliente_producto"
-			},
-			fixedHeader: true,
-			dataSrc:"",
-		},
-		"columns":[
-			{"data":"Fecha"},
-			{"data":"Cantidad"},
-			{"data":"NombreProducto"},
-			{"data":"Nombre"},
-		]
-	}); */
 
 	$.ajax({
 		type: "POST",
@@ -708,7 +686,7 @@ function cliente_producto(){
 			console.log(resp);
 			var table = $("#cliente_producto").DataTable();
 			for (var i = 0; i < resp.length; i++) {
-				table.row.add([resp[i].Fecha, resp[i].Cantidad, resp[i].NombreProducto, resp[i].Nombre, '<button onclick=test('+resp[i].factura+')>Ver Factura</button>']).draw();
+				table.row.add([resp[i].Fecha, resp[i].Cantidad, resp[i].NombreProducto, resp[i].Nombre, '<button class="btn btn-success btn-sm" onclick=test('+resp[i].factura+')>Ver Factura</button>']).draw();
 			}
 		}
 	});
@@ -739,11 +717,17 @@ function observar(observ, listado){
 function ver_factura(i){
 	//alert(i);
 	NumeroFactura = datos[i]["idFactura"];
-	location.href='facturaYaVenta.php?num='+NumeroFactura;
+	window.open(
+	'facturaYaVenta.php?num='+NumeroFactura,
+	'_blank' // <- This is what makes it open in a new window.
+);
 }
 function ver_facturaCompra(i){
 	NumeroFactura = datos[i]["idFactura"];
-	location.href='facturaYaCompra.php?num='+NumeroFactura;
+	window.open(
+	'facturaYaCompra.php?num='+NumeroFactura,
+	'_blank' // <- This is what makes it open in a new window.
+);
 }
 
 function validar_hasta()

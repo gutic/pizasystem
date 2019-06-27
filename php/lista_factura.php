@@ -58,7 +58,7 @@ if($resultado->num_rows > 0){
 					<td>".$fila['Descuento']."</td>
 					<td>".$fila['FormaPago']."</td>
 					<td>".$fila['Iva']."</td>
-					<td><a class='btn btn-success btn-sm' href='javascript:mostrar(".$fila['NroComprobante'].",".$fila['tipo_operacion'].")'>Ver detalle</a></td>
+					<td><a class='btn btn-success btn-sm' href='javascript:ver_lista_factura(".$fila['Id'].")'>Ver detalle</a></td>
 			</tr>";
 		}elseif ($fila['tipo_operacion'] == 2) {
 			$salida.="<tr>
@@ -69,7 +69,7 @@ if($resultado->num_rows > 0){
 					<td>".$fila['Descuento']."</td>
 					<td>".$fila['FormaPago']."</td>
 					<td>".$fila['Iva']."</td>
-					<td><a class='btn btn-success btn-sm' href='javascript:mostrar(".$fila['id_compra'].",".$fila['tipo_operacion'].")'>Ver detalle</a></td>
+					<td><a class='btn btn-success btn-sm' href='javascript:ver_lista_facturaCompra(".$fila['Id'].")'>Ver detalle</a></td>
 			</tr>";
 		}
 	}
