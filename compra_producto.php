@@ -12,10 +12,13 @@
 	    <tr>
 	      <td style="width:50%" valign="top">
 						<fieldset>
-							<legend>Productos</legend>
+							<legend>Producto/Insumo</legend>
 							<form id="busqueda">
 							Buscar producto <input type="text" name="Buscar" id="Buscar" onchange="buscar_datos_producto()" >
 							<input type="button" value="Buscar"  onclick="buscar_datos_producto();" />
+							<br>
+							Buscar Insumo <input type="text" name="Buscar" id="Buscar" onchange="buscar_datos_insumo()" >
+							<input type="button" value="Buscar"  onclick="buscar_datos_insumo();" />
 							<br>
 							Cantidad<input type="number" id="Cantidad" value="0">
 							<br>
@@ -50,7 +53,7 @@
 	      </td>
 				<td style="width:50%" valign="top">
 					<fieldset>
-						<legend>Formulario Compra Insumo</legend>
+						<legend>Formulario Compra Producto/Insumo</legend>
 						<form id="formulario">
 							<table>
 								<tr>

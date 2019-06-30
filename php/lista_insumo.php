@@ -12,7 +12,8 @@ $salida ="";
 //si escribió algo en buscar
 if(isset($_POST['consulta'])){
 	$id = $conexion -> real_escape_string($_POST['consulta']);
-	$query = "SELECT * FROM Insumo WHERE activo = '1' AND (Nombre like '%".$id."%' OR Id_insumo like '%".$id."%')";
+	$query = "SELECT * FROM Insumo WHERE activo = '1' AND
+	(Nombre like '%".$id."%' OR Id_insumo like '%".$id."%')";
 }
 
 $resultado = $conexion -> query($query);

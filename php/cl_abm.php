@@ -121,7 +121,7 @@
                   for ($r=0; $r < mysqli_num_rows($receta); $r++) {
                     $salida_receta = mysqli_fetch_array($receta);
                     $stock_actual = $salida_receta[6] - ($salida_receta[5] * $tabla_cant[$i]);
-                    mysqli_query($conexion, "UPDATE Insumo SET Cantidad ='$stock_actual' WHERE Id_insumo = '$salida_receta[1]';") or
+                    mysqli_query($conexion, "UPDATE Insumo SET Stock ='$stock_actual' WHERE Id_insumo = '$salida_receta[1]';") or
                      die("Problemas en el select:".mysqli_error($conexion));
                   };
                   mysqli_query($conexion, "INSERT INTO DetalleFactura (Id, NroComprobante, IdProducto, Cantidad, Precio, tipo_operacion) VALUES(NULL, '$num_factura','$tabla_id[$i]','$tabla_cant[$i]','$reg_producto[3]','1');");
@@ -246,7 +246,6 @@
               die("Problemas en el select:".mysqli_error($conexion));
             $reg_detalle=mysqli_fetch_array($registros);
 
-            //retornar if(observacion=="insumo" || observacion=="producto")
 
             $registros=mysqli_query($conexion,"SELECT NombreProducto FROM Producto WHERE Id = '$reg_detalle[2]';") or
               die("Problemas en el select:".mysqli_error($conexion));
@@ -263,11 +262,34 @@
           break;
       case 'detalle_factura_compra':
         $num = $_POST['num'];
-        $result=mysqli_query($conexion,"SELECT df.*, pr.*, fa.* FROM DetalleFactura df INNER JOIN Producto pr INNER JOIN Factura fa
-          WHERE fa.Id = '$num' AND df.tipo_operacion = 2 AND fa.id_compra = df.NroComprobante AND df.IdProducto = pr.Id;") or
+        $result=mysqli_query($conexion,"SELECT df.*, pr.*, fa.*, pr.NombreProducto as Nombre
+          FROM DetalleFactura as df
+          INNER JOIN Factura as fa
+          INNER JOIN Producto as pr
+          WHERE fa.Id = '$num'
+          AND fa.id_compra = df.NroComprobante
+          AND df.IdProducto = pr.Id
+          AND df.tipo_operacion = 2
+          AND df.observacion = 1;") or
           die("Problemas en el select:".mysqli_error($conexion));
+
         while( $reg = mysqli_fetch_assoc($result)){
           $data[] = $reg;
+        }
+
+        $result2=mysqli_query($conexion,"SELECT df.*, ins.*, fa.*, ins.Nombre as Nombre
+          FROM DetalleFactura as df
+          INNER JOIN Factura as fa
+          INNER JOIN Insumo as ins
+          WHERE fa.Id = '$num'
+          AND fa.id_compra = df.NroComprobante
+          AND df.IdProducto = ins.Id_insumo
+          AND df.tipo_operacion = 2
+          AND df.observacion = 2;") or
+          die("Problemas en el select:".mysqli_error($conexion));
+
+        while( $reg2 = mysqli_fetch_assoc($result2)){
+          $data[] = $reg2;
         }
         echo json_encode($data);
         break;

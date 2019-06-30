@@ -4,38 +4,32 @@ function factura_compraProducto()
 	$.ajax({
 		url:'php/compra.php',
 		type:'POST',
-		data: "boton=factura_compraProducto&"+data_form+'&tabla_cant='+tabla_cant+'&tabla_id='+tabla_id+'&tabla_precio='+tabla_precio
+		data: "boton=factura_compraProducto&"+data_form+'&tabla_cant='+tabla_cant+'&tabla_id='+tabla_id+'&tabla_precio='+tabla_precio+'&tabla_tipo='+tabla_tipo
 	}).done(function(resp){
-		alert(resp);
-		if(resp > 0){
-			NumeroFactura = resp;
-			limpiar();
-			alertify.succes("Compra Producto Ok");
+		var data = eval(resp);
+		NumeroFactura = data[0]["Id"];
+		if(NumeroFactura > 0){
+			location.href='facturaYaCompra.php?num='+NumeroFactura
+			// window.open(
+			// 'facturaYaCompra.php?num='+NumeroFactura,
+			// '_blank' // <- This is what makes it open in a new window.
+			// )
 		}else {
 			if(resp == 0){
-				alertify.error("debe rellenar los cambos");
+				alertify.success("debe rellenar los cambos");
 			};
 		};
 	});
 }
-function factura_compraInsumo()
-{
-	var data_form = $("#formulario").serialize()
+function test(){
+	alert("asd")
 	$.ajax({
 		url:'php/compra.php',
 		type:'POST',
-		data: "boton=factura_compraInsumo&"+data_form+'&tabla_cant='+tabla_cant+'&tabla_id='+tabla_id+'&tabla_precio='+tabla_precio
+		data: "boton=test"
 	}).done(function(resp){
-		alert(resp);
-		if(resp > 0){
-			NumeroFactura = resp;
-			limpiar();
-			alertify.succes("Compra Insumo Ok");
-		}else {
-			if(resp == 0){
-				alertify.error("debe rellenar los cambos");
-			};
-		};
+		var data = eval(resp);
+		alert(data[0]["Id"]);
 	});
 }
 

@@ -226,9 +226,9 @@
     case 'insertar_receta':
       $receta = $_POST["receta"];
       $precio = $_POST["precio_receta"];
-      mysqli_query($conexion,"INSERT INTO Producto (NombreProducto, CostoProducto, esElaborado, activo) VALUES('$receta','$precop','1','1');")or
+      mysqli_query($conexion,"INSERT INTO Producto (NombreProducto, CostoProducto, esElaborado, activo) VALUES('$receta','$precio','1','1');")or
       die("Problemas en el update:".mysqli_error($conexion));
-      echo "ok";
+      echo $precio;
       break;
     case 'upd_receta':
       $id = $_POST["id"];

@@ -293,7 +293,7 @@
 						<br>
 						 <fieldset>
 								<legend>Buscar Receta</legend>
-								<b>Nombre o cod Usuario:</b>
+								<b>Nombre receta:</b>
 								<input type="text" name="receta" id="_receta" onchange="buscar_receta()"/ >
 								<input type="button" value="Buscar recetas"  onclick="buscar_receta();" />
 						<table style="width:100%" border="2">

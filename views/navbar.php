@@ -55,9 +55,6 @@
 								<a href="abm.php">____ABM____ </a>
 							</li>
 							<li>
-									<a href="compra_insumo.php">Compras Insumo</a>
-							</li>
-							<li>
 									<a href="compra_producto.php">Compras Producto</a>
 							</li>
 							<li>

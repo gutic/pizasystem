@@ -2,6 +2,7 @@ var num = 0;
 var tabla_id = [];
 var tabla_cant = [];
 var tabla_precio = [];
+var tabla_tipo = [];
 var num_id = [];
 var  id_fila;
 var NumeroFactura;
@@ -246,16 +247,16 @@ function mostrar_facturaCompra(num)
 		datos = eval(resp);
 		var subtotal = 0;
 		var listado = "";
-		// alert(datos[0]["Precio"]);
+		console.log(resp);
 		for(var i=0;i<datos.length;i++){
 			var bgcolor = (i%2==0) ? "#FFFFFF":"#EDEDED";
 			listado += '	<tr bgcolor="'+bgcolor+'">'
-			listado += ' 		<td style="width:50%">'+datos[i]["NombreProducto"]+'</td>'
+			listado += ' 		<td style="width:50%">'+datos[i]["Nombre"]+'</td>'
 			listado += ' 		<td style="width:20%">'+datos[i]["Cantidad"]+'</td>'
 			listado += ' 		<td style="width:20%">$'+datos[i]["Precio"]+'</td>'
-			listado += ' 		<td style="width:10%">$'+datos[i]["Precio"]*datos[i]["Cantidad"]+'</td>'
+			listado += ' 		<td style="width:10%">$'+datos[i]["Precio"]+'</td>'
 			listado += '	</tr>'
-			subtotal += datos[i]["Precio"]*datos[i]["Cantidad"];
+			subtotal += datos[i]["Precio"]*1;
 		}
 		$("#numero5").html(listado);
 		iva = subtotal*(datos[0]["Iva"]);
@@ -498,80 +499,6 @@ function movimientos_caja(){
 	}
 }
 
-
-//_______________________INSUMO_____________________________//
-
-//agrego productos a la tabla dinamica
-function agregar_insumo(id_prod)
-{
-		var Cantidad = $('#Cantidad').val();
-		var precio = $('#precio').val();
-		if (Cantidad > 0 && precio > 0) {
-			tabla_id[tabla_id.length] = id_prod;
-			tabla_cant[tabla_cant.length] = Cantidad;
-			tabla_precio[tabla_precio.length] = precio;
-			alert(tabla_precio[num]);
-			alert(precio);
-			$.ajax({
-				url:'php/cl_abm.php',
-				type:'POST',
-				data: 'Cantidad='+Cantidad+'&id_prod='+id_prod+"&boton=agregar_insumo"
-			}).done(function(resp){
-					alert("OK");
-					var listado = "";
-					data = eval(resp);
-					var id_fila = "name"+num;
-					listado += '<tr id="'+id_fila+'">'
-					listado += '<td  name=$'+num+'  style="width:30%">'+data[0]["Id_insumo"]+'</td>'
-					listado += '<td  style="width:40%">'+data[0]["Nombre"]+'</td>'
-					listado += '<td  name=$'+num+' style="width:10%">'+Cantidad+'</td>'
-					listado += '<td  name=$'+num+' style="width:10%">'+precio+'</td>'
-					listado += '<td style="width:10%"><input type="button" value="Eliminar" onclick="$('+id_fila+').remove();borrar('+num+');" /></td>'
-					listado += '</tr>'
-					$('#productos').append(listado);
-					num +=1;
-			});
-		}else {
-			alert("Valores tienen que ser mayores a cero");
-		}
-
-}
-//______________________PRODUCTO__________________________________//
-//agrego productos a la tabla dinamica
-function agregar_producto(id_prod)
-{
-		var Cantidad = $('#Cantidad').val();
-		var precio = $('#precio').val();
-		if (Cantidad > 0 && precio > 0) {
-			tabla_id[tabla_id.length] = id_prod;
-			tabla_cant[tabla_cant.length] = Cantidad;
-			tabla_precio[tabla_precio.length] = precio;
-			alert(tabla_precio[num]);
-			alert(precio);
-			$.ajax({
-				url:'php/cl_abm.php',
-				type:'POST',
-				data: 'Cantidad='+Cantidad+'&id_prod='+id_prod+"&boton=agregar"
-			}).done(function(resp){
-					alert("OK");
-					var listado = "";
-					data = eval(resp);
-					var id_fila = "name"+num;
-					listado += '<tr id="'+id_fila+'">'
-					listado += '<td  name=$'+num+'  style="width:30%">'+data[0]["Id"]+'</td>'
-					listado += '<td  style="width:40%">'+data[0]["NombreProducto"]+'</td>'
-					listado += '<td  name=$'+num+' style="width:10%">'+Cantidad+'</td>'
-					listado += '<td  name=$'+num+' style="width:10%">'+precio+'</td>'
-					listado += '<td style="width:10%"><input type="button" value="Eliminar" onclick="$('+id_fila+').remove();borrar('+num+');" /></td>'
-					listado += '</tr>'
-					$('#productos').append(listado);
-					num +=1;
-			});
-		}else {
-			alert("Valores tienen que ser mayores a cero");
-		}
-
-}
 //_Movimientos//
 
 
