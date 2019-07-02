@@ -55,10 +55,6 @@
 	<form class="p-3 mb-2 bg-dark">
 
 		<div class="form-row">
-			<label>Busqueda</label>
-		</div>
-
-		<div class="form-row">
 				<div class="form-group col-md-4">
 					<button type="button" class="btn btn-default" onclick="cliente_producto();">Buscar</button>
 					<button type="button" class="btn btn-default" onclick="limpiar_tabla2();">borrar</button>
@@ -68,7 +64,7 @@
 	    			<div class="col-xs-12">
 	    				<div class="box">
 	    					<div class="box-header">
-	    						<h3 class="box-title">Movimientos</h3>
+	    						<h3 class="box-title">Movimientos Producto - Cliente </h3>
 	    					</div>
 	    					<!-- /.box-header -->
 	    					<div class="box-body">
@@ -98,6 +94,56 @@
 
 </form>
 
+<br>
+<br>
+<br>
+
+
+<form class="p-3 mb-2 bg-dark text-white">
+	<div class="form-row">
+		<label>Busqueda</label>
+	</div>
+	<form class="p-3 mb-2 bg-dark">
+
+		<div class="form-row">
+				<div class="form-group col-md-4">
+					<button type="button" class="btn btn-default" onclick="stock_productos();">Buscar</button>
+					<button type="button" class="btn btn-default" onclick="limpiar_tabla3();">borrar</button>
+				</div>
+	    	<section class="content">
+	    		<div class="row">
+	    			<div class="col-xs-12">
+	    				<div class="box">
+	    					<div class="box-header">
+	    						<h3 class="box-title">Movimientos Producto - Cliente </h3>
+	    					</div>
+	    					<!-- /.box-header -->
+	    					<div class="box-body">
+	    						<table id="stock" class="datatables" border="1" style="width:100%">
+										<thead>
+	    								<tr>
+												<th>Nombre Producto</th>
+	    									<th>Fecha último ingreso</th>
+	    									<th>Cantidad Ingreso</th>
+	    									<th>Cantidad Salida</th>
+	    									<th>Stock Actual</th>
+	    								</tr>
+	    							</thead>
+
+	    						</table>
+	    					</div>
+	    					<!-- /.box-body -->
+	    				</div>
+	    			</div>
+	    			<!-- /.col -->
+	    		</div>
+	    		<!-- /.row -->
+	    	</section>
+
+	    </div>
+	</form>
+
+</form>
 
 
 <?php

@@ -593,7 +593,7 @@ function buscar()
 
 }
 
-//=============DATA TABLE =====================
+//=============DATA TABLE CLIENTE PRODUCTO=====================
 
 
 function cliente_producto(){
@@ -618,6 +618,31 @@ function cliente_producto(){
 		}
 	});
 }
+//=============DATA TABLE Stock=====================
+
+
+function stock_productos(){
+
+	$.ajax({
+		type: "POST",
+		data: {
+			"boton":"stock_productos",
+			// "id_loc_origen": 1,
+			// "id_loc_destino": 28,
+			// "fecha": "2019-05-21"
+		},
+		url: "php/busco_mov.php",
+		dataType: "json",
+		cache: false,
+		success: function(resp) {
+			console.log(resp);
+			var table = $("#stock").DataTable();
+			for (var i = 0; i < resp.length; i++) {
+				table.row.add([resp[i].Nombre,resp[i].Fecha,resp[i].Cantidad,resp[i].Salida,resp[i].Stock]).draw();
+			}
+		}
+	});
+}
 
 function test(i){
 	NumeroFactura = i;
@@ -635,6 +660,10 @@ function limpiar_tabla2(){
 	$('#cliente_producto').html(listado);
 }
 
+function limpiar_tabla3(){
+	listado += ''
+	$('#stock').html(listado);
+}
 
 function observar(observ, listado){
 

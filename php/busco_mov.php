@@ -155,6 +155,53 @@ $boton = $_POST['boton'];
         echo 0;
       }
     break;
+    case 'stock_productos':
+    $resultado=mysqli_query($conexion,"SELECT Id_insumo FROM Insumo WHERE activo = 1") or
+      die("Problemas en el select:".mysqli_error($conexion));
+      for ($i=0; $i < mysqli_num_rows($resultado) ; $i++) {
+        $stock_id = mysqli_fetch_array($resultado);
+        $result=mysqli_query($conexion,"SELECT ins.Nombre, fa.Fecha, df.Cantidad, ins.Salida, ins.Stock
+        from DetalleFactura df
+        INNER JOIN Factura fa
+        INNER JOIN Insumo ins
+        JOIN
+            (SELECT MAX(Id) as Id
+            FROM `DetalleFactura`
+            WHERE IdProducto = '$stock_id[0]'
+            AND tipo_operacion = 2
+            AND observacion = 2) as ide
+        WHERE df.Id = ide.Id
+        AND df.NroComprobante = fa.id_compra
+        AND df.IdProducto = ins.Id_insumo") or
+          die("Problemas en el select:".mysqli_error($conexion));
+        while ($reg = mysqli_fetch_assoc($result)) {
+          $data[] = $reg;
+        }
+      }
+    $resultado=mysqli_query($conexion,"SELECT Id FROM Producto WHERE esElaborado = 0 AND activo = 1") or
+      die("Problemas en el select:".mysqli_error($conexion));
+      for ($i=0; $i < mysqli_num_rows($resultado) ; $i++) {
+        $stock_id = mysqli_fetch_array($resultado);
+        $result=mysqli_query($conexion,"SELECT pr.NombreProducto as Nombre, fa.Fecha, df.Cantidad, pr.Salida, pr.Stock
+        from DetalleFactura df
+        INNER JOIN Factura fa
+        INNER JOIN Producto pr
+        JOIN
+            (SELECT MAX(Id) as Id
+            FROM `DetalleFactura`
+            WHERE IdProducto = '$stock_id[0]'
+            AND tipo_operacion = 2
+            AND observacion = 1) as ide
+        WHERE df.Id = ide.Id
+        AND df.NroComprobante = fa.id_compra
+        AND df.IdProducto = pr.Id") or
+          die("Problemas en el select:".mysqli_error($conexion));
+        while ($reg = mysqli_fetch_assoc($result)) {
+          $data[] = $reg;
+        }
+      }
+      echo json_encode($data);
+    break;
     default:
       console.log("default");
       echo json_encode("mal");
