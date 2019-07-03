@@ -104,30 +104,36 @@
             mysqli_query($conexion, "INSERT INTO Factura (Id, Tipo, FormaPago, Persona, NroComprobante, Iva, Descuento, Direccion, tipo_operacion, usuario) VALUES(NULL, '$tipo_factura','$formapago','$reg_cli[0]','$num_factura','0.21','$descuento','$dir','1','$usuario');")
             or die("Problemas en el insert factura:".mysqli_error($conexion));
             for ($i=0; $i < sizeof($tabla_id); $i++) {
+
               if ($tabla_id[$i] > 0){
                 $result = mysqli_query($conexion,"SELECT * FROM Producto WHERE Id ='$tabla_id[$i]';");
                 $reg_producto = mysqli_fetch_array($result);
-                if ($reg_producto[4] == 0) { //verifico si es un producto elaborado o un articulo.
-                  $stock_actual = $reg_producto[1] - $tabla_cant[$i];
-                  mysqli_query($conexion, "UPDATE Producto SET Stock ='$stock_actual' WHERE Id = '$tabla_id[$i]';") or
+                if ($reg_producto[5] == 0) { //verifico si es un producto elaborado o un articulo.
+                  $stock_actual = $reg_producto[2] - $tabla_cant[$i];
+                  $salida = $reg_producto[1] + $tabla_cant[$i];
+                  mysqli_query($conexion, "UPDATE Producto SET Stock ='$stock_actual', Salida ='$salida' WHERE Id = '$tabla_id[$i]';") or              //actualizo el stock de prodcuto
                   die("Problemas en el select:".mysqli_error($conexion));
                   //agregar a detalle factura
-                  mysqli_query($conexion, "INSERT INTO DetalleFactura (Id, NroComprobante, IdProducto, Cantidad, Precio, tipo_operacion) VALUES(NULL, '$num_factura','$tabla_id[$i]','$tabla_cant[$i]','$reg_producto[3]','1');");
+                  mysqli_query($conexion, "INSERT INTO DetalleFactura (Id, NroComprobante, IdProducto, Cantidad, Precio, tipo_operacion, observacion)
+                  VALUES(NULL, '$num_factura','$tabla_id[$i]','$tabla_cant[$i]','$reg_producto[4]','1','1');");
                   echo ulti_factura(1);
                 };
-                if ($reg_producto[4] == 1){
+                if ($reg_producto[5] == 1){
                   $receta = mysqli_query($conexion, "SELECT re.*, ins.* FROM Receta re INNER JOIN Insumo ins WHERE re.Id_producto = $reg_producto[0] AND re.Id_insumo = ins.Id_insumo AND ins.activo = 1") or
                   die("Problemas en el inner:".mysqli_error($conexion));
                   for ($r=0; $r < mysqli_num_rows($receta); $r++) {
                     $salida_receta = mysqli_fetch_array($receta);
-                    $stock_actual = $salida_receta[6] - ($salida_receta[5] * $tabla_cant[$i]);
-                    mysqli_query($conexion, "UPDATE Insumo SET Stock ='$stock_actual' WHERE Id_insumo = '$salida_receta[1]';") or
+                    $stock_actual = $salida_receta[8] - ($salida_receta[3] * $tabla_cant[$i]);
+                    $salida = $salida_receta[7] + ($salida_receta[3] * $tabla_cant[$i]);
+                    mysqli_query($conexion, "UPDATE Insumo SET Stock ='$stock_actual', Salida ='$salida' WHERE Id_insumo = '$salida_receta[1]';") or
                      die("Problemas en el select:".mysqli_error($conexion));
                   };
-                  mysqli_query($conexion, "INSERT INTO DetalleFactura (Id, NroComprobante, IdProducto, Cantidad, Precio, tipo_operacion) VALUES(NULL, '$num_factura','$tabla_id[$i]','$tabla_cant[$i]','$reg_producto[3]','1');");
+                  mysqli_query($conexion, "INSERT INTO DetalleFactura (Id, NroComprobante, IdProducto, Cantidad, Precio, tipo_operacion, observacion)
+                  VALUES(NULL, '$num_factura','$tabla_id[$i]','$tabla_cant[$i]','$reg_producto[4]','1','2');");
                   echo ulti_factura(1);
                 };
               };
+
             };
           }else {
             echo -1;

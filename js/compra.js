@@ -21,17 +21,17 @@ function factura_compraProducto()
 		};
 	});
 }
-function test(){
-	alert("asd")
-	$.ajax({
-		url:'php/compra.php',
-		type:'POST',
-		data: "boton=test"
-	}).done(function(resp){
-		var data = eval(resp);
-		alert(data[0]["Id"]);
-	});
-}
+// function test(){
+// 	alert("asd")
+// 	$.ajax({
+// 		url:'php/compra.php',
+// 		type:'POST',
+// 		data: "boton=test"
+// 	}).done(function(resp){
+// 		var data = eval(resp);
+// 		alert(data[0]["Id"]);
+// 	});
+// }
 
 function limpiar()
 {

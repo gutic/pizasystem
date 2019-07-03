@@ -43,7 +43,7 @@ switch ($boton) {
               $result = mysqli_query($conexion,"SELECT Stock, Id FROM Producto WHERE Id ='$tabla_id[$i]';");
               $reg_producto = mysqli_fetch_array($result);
               $stock_actual = $reg_producto[0] + $tabla_cant[$i];
-              mysqli_query($conexion, "UPDATE Producto SET Stock = '$stock_actual' WHERE Id = '$tabla_id[$i]';") or
+              mysqli_query($conexion, "UPDATE Producto SET Stock = '$stock_actual', Salida = 0 WHERE Id = '$tabla_id[$i]';") or
               die("Problemas en el select:".mysqli_error($conexion));
               //agregar a detalle factura
               mysqli_query($conexion, "INSERT INTO DetalleFactura (Id, NroComprobante, IdProducto, Cantidad, Precio, tipo_operacion, observacion)
@@ -52,7 +52,7 @@ switch ($boton) {
               $result = mysqli_query($conexion,"SELECT Stock, Id_insumo FROM Insumo WHERE Id_insumo ='$tabla_id[$i]';");
               $reg_producto = mysqli_fetch_array($result);
               $stock_actual = $reg_producto[0] + $tabla_cant[$i];
-              mysqli_query($conexion, "UPDATE Insumo SET Stock = '$stock_actual' WHERE Id_insumo = '$tabla_id[$i]';") or
+              mysqli_query($conexion, "UPDATE Insumo SET Stock = '$stock_actual', Salida = 0 WHERE Id_insumo = '$tabla_id[$i]';") or
               die("Problemas en el select:".mysqli_error($conexion));
               //agregar a detalle factura
               mysqli_query($conexion, "INSERT INTO DetalleFactura (Id, NroComprobante, IdProducto, Cantidad, Precio, tipo_operacion, observacion)
