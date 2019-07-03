@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 02-07-2019 a las 19:12:08
+-- Tiempo de generación: 03-07-2019 a las 18:23:51
 -- Versión del servidor: 10.0.38-MariaDB-0ubuntu0.16.04.1
 -- Versión de PHP: 7.0.33-0ubuntu0.16.04.4
 
@@ -98,7 +98,41 @@ INSERT INTO `DetalleFactura` (`Id`, `NroComprobante`, `IdProducto`, `Cantidad`, 
 (73, 29, 1, 5, 5.00, 2, '1'),
 (74, 29, 2, 5, 5.00, 2, '2'),
 (75, 30, 1, 23, 23.00, 2, '1'),
-(76, 30, 3, 23, 23.00, 2, '2');
+(76, 30, 3, 23, 23.00, 2, '2'),
+(77, 31, 1, 5, 150.00, 2, '1'),
+(78, 32, 4, 1, 55.00, 2, '1'),
+(79, 8, 3, 1, 0.00, 1, ''),
+(80, 8, 4, 2, 0.00, 1, ''),
+(81, 9, 4, 1, 25.00, 1, '1'),
+(82, 10, 1, 2, 10.10, 1, '1'),
+(83, 10, 6, 2, 15.00, 1, '2'),
+(84, 11, 2, 3, 20.00, 1, '2'),
+(85, 12, 1, 1, 10.10, 1, '1'),
+(86, 12, 2, 1, 20.00, 1, '2'),
+(87, 13, 6, 2, 15.00, 1, '2'),
+(88, 13, 1, 2, 10.10, 1, '1'),
+(89, 15, 3, 2, 16.00, 1, '2'),
+(90, 16, 3, 2, 16.00, 1, '2'),
+(91, 19, 6, 2, 15.00, 1, '2'),
+(92, 20, 6, 2, 15.00, 1, '2'),
+(93, 20, 4, 2, 25.00, 1, '1'),
+(94, 21, 6, 2, 15.00, 1, '2'),
+(95, 21, 1, 2, 10.10, 1, '1'),
+(96, 22, 6, 2, 15.00, 1, '2'),
+(97, 22, 1, 2, 10.10, 1, '1'),
+(98, 23, 3, 2, 16.00, 1, '2'),
+(99, 23, 6, 2, 15.00, 1, '2'),
+(100, 24, 4, 2, 25.00, 1, '1'),
+(101, 24, 6, 2, 15.00, 1, '2'),
+(102, 25, 2, 2, 20.00, 1, '2'),
+(103, 26, 1, 2, 10.10, 1, '1'),
+(104, 26, 6, 2, 15.00, 1, '2'),
+(105, 27, 1, 2, 10.10, 1, '1'),
+(106, 27, 4, 2, 25.00, 1, '1'),
+(107, 27, 6, 2, 15.00, 1, '2'),
+(108, 33, 2, 5000, 3.00, 2, '2'),
+(109, 33, 3, 100, 50.00, 2, '2'),
+(110, 33, 1, 10, 200.00, 2, '2');
 
 -- --------------------------------------------------------
 
@@ -172,7 +206,30 @@ INSERT INTO `Factura` (`Id`, `id_compra`, `id_egreso`, `id_ingreso`, `Tipo`, `Fo
 (51, 27, 0, 0, '', 'efect', '5', 0, '2019-06-30 03:57:24', 0, 0, 'Local Conercial', 2, '1'),
 (52, 28, 0, 0, '', 'efect', '5', 0, '2019-06-30 03:57:31', 0, 0, 'Local Conercial', 2, '1'),
 (53, 29, 0, 0, '', 'asdsad', '18', 0, '2019-06-30 03:58:46', 0, 0, 'Local Conercial', 2, '1'),
-(54, 30, 0, 0, '', 'efect', '18', 0, '2019-06-30 04:01:21', 0, 0, 'Local Conercial', 2, '1');
+(54, 30, 0, 0, '', 'efect', '18', 0, '2019-06-30 04:01:21', 0, 0, 'Local Conercial', 2, '1'),
+(55, 31, 0, 0, '', 'efct', '18', 0, '2019-07-03 16:58:57', 0, 0, 'Local Conercial', 2, '1'),
+(56, 32, 0, 0, '', 'efect', '4', 0, '2019-07-03 17:00:40', 0, 0, 'Local Conercial', 2, '1'),
+(57, 0, 0, 0, 'A', 'efect', '2', 8, '2019-07-03 19:18:43', 0.21, 0, 'Local Conercial', 1, '1'),
+(58, 0, 0, 0, 'A', 'hgygf', '2', 9, '2019-07-03 19:34:45', 0.21, 0, 'Local Conercial', 1, '1'),
+(59, 0, 0, 0, 'A', 'efect', '4', 10, '2019-07-03 19:51:17', 0.21, 0, 'Local Conercial', 1, '1'),
+(60, 0, 0, 0, 'A', 'efect', '5', 11, '2019-07-03 20:01:03', 0.21, 0, 'Local Conercial', 1, '1'),
+(61, 0, 0, 0, 'A', 'efe', '4', 12, '2019-07-03 20:04:01', 0.21, 0, 'Local Conercial', 1, '1'),
+(62, 0, 0, 0, 'A', 'efect', '13', 13, '2019-07-03 20:06:50', 0.21, 0, 'Local Conercial', 1, '1'),
+(63, 0, 0, 0, 'A', 'efect', '13', 14, '2019-07-03 20:11:03', 0.21, 0, 'Local Conercial', 1, '1'),
+(64, 0, 0, 0, 'A', 'efect', '13', 15, '2019-07-03 20:12:18', 0.21, 0, 'Local Conercial', 1, '1'),
+(65, 0, 0, 0, 'A', 'efect', '18', 16, '2019-07-03 20:13:18', 0.21, 0, 'Local Conercial', 1, '1'),
+(66, 0, 0, 0, 'A', 'qweqw', '13', 17, '2019-07-03 20:15:27', 0.21, 0, 'Local Conercial', 1, '1'),
+(67, 0, 0, 0, 'A', 'qweqw', '13', 18, '2019-07-03 20:15:40', 0.21, 0, 'Local Conercial', 1, '1'),
+(68, 0, 0, 0, 'A', 'qweqw', '13', 19, '2019-07-03 20:20:18', 0.21, 0, 'Local Conercial', 1, '1'),
+(69, 0, 0, 0, 'A', 'efect', '13', 20, '2019-07-03 20:23:34', 0.21, 0, 'Local Conercial', 1, '1'),
+(70, 0, 0, 0, 'A', 'efect', '5', 21, '2019-07-03 20:26:32', 0.21, 0, 'Local Conercial', 1, '1'),
+(71, 0, 0, 0, 'A', 'efect', '4', 22, '2019-07-03 20:33:04', 0.21, 0, 'Local Conercial', 1, '1'),
+(72, 0, 0, 0, 'A', 'efect', '4', 23, '2019-07-03 20:34:10', 0.21, 0, 'Local Conercial', 1, '1'),
+(73, 0, 0, 0, 'A', 'efect', '4', 24, '2019-07-03 20:38:45', 0.21, 0, 'Local Conercial', 1, '1'),
+(74, 0, 0, 0, 'A', 'efect', '4', 25, '2019-07-03 20:39:54', 0.21, 0, 'Local Conercial', 1, '1'),
+(75, 0, 0, 0, 'A', 'efect', '4', 26, '2019-07-03 20:40:43', 0.21, 0, 'Local Conercial', 1, '1'),
+(76, 0, 0, 0, 'A', 'efect', '13', 27, '2019-07-03 20:43:09', 0.21, 0, 'Local Conercial', 1, '1'),
+(77, 33, 0, 0, '', 'debito', '5', 0, '2019-07-03 20:56:05', 0, 0, 'Local Conercial', 2, '1');
 
 -- --------------------------------------------------------
 
@@ -194,14 +251,14 @@ CREATE TABLE `Insumo` (
 --
 
 INSERT INTO `Insumo` (`Id_insumo`, `Nombre`, `UnidadMedida`, `Salida`, `Stock`, `activo`) VALUES
-(1, 'peperoni', 0.2, 14, 418.2, 1),
-(2, 'papas', 200, NULL, 635, 1),
-(3, 'aceitunas', 5, NULL, 235, 1),
-(4, 'morron', 1, NULL, 20, 0),
-(5, 'chorizo', 1, NULL, 155, 1),
-(6, 'mayonesa', 0.2, NULL, 10.4, 1),
-(7, 'pan', 1, NULL, 50, 1),
-(8, 'aceitunas', 1, NULL, 80, 1);
+(1, 'peperoni', 0.2, 0, 10, 1),
+(2, 'papas', 1000, 0, 5000, 1),
+(3, 'aceitunas', 5, 0, 335, 1),
+(4, 'morron', 1, 0, 20, 0),
+(5, 'chorizo', 1, 4, 48, 1),
+(6, 'mayonesa', 0.2, 40, 7980, 1),
+(7, 'pan', 1, 4, 48, 1),
+(8, 'aceitunas', 1, 2, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -254,14 +311,14 @@ CREATE TABLE `Producto` (
 --
 
 INSERT INTO `Producto` (`Id`, `Salida`, `Stock`, `NombreProducto`, `CostoProducto`, `esElaborado`, `activo`) VALUES
-(1, NULL, 42, 'Coca', 10.10, 0, 1),
-(2, NULL, 0, 'papas_fritas', 20.00, 1, 1),
-(3, NULL, 0, 'Napolitana', 16.00, 1, 1),
-(4, NULL, 269, 'Cerveza', 25.00, 0, 1),
-(5, NULL, 200, 'PapasLays', 30.00, 0, 0),
-(6, NULL, 0, 'Choripan', 15.00, 1, 1),
-(8, NULL, 12, 'empanadas', 24.00, 1, 0),
-(9, NULL, 0, 'LaPrueba', 12.00, 1, 1);
+(1, 18, 34, 'Coca', 10.10, 0, 1),
+(2, 0, 0, 'papas_fritas', 20.00, 1, 1),
+(3, 0, 0, 'Napolitana', 16.00, 1, 1),
+(4, 7, 261, 'Cerveza', 25.00, 0, 1),
+(5, 0, 200, 'PapasLays', 30.00, 0, 0),
+(6, 0, 0, 'Choripan', 15.00, 1, 1),
+(8, 0, 12, 'empanadas', 24.00, 1, 0),
+(9, 0, 0, 'LaPrueba', 12.00, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -281,13 +338,13 @@ CREATE TABLE `Receta` (
 --
 
 INSERT INTO `Receta` (`Id_receta`, `Id_insumo`, `Id_producto`, `consume`) VALUES
-(1, 1, 3, 0),
-(6, 3, 3, 0),
-(11, 5, 6, 0),
-(12, 7, 6, 0),
-(13, 6, 6, 0),
 (18, 2, 2, 200),
-(19, 8, 9, 12);
+(19, 8, 9, 12),
+(20, 1, 3, 0.2),
+(21, 8, 3, 5),
+(22, 7, 6, 1),
+(23, 5, 6, 1),
+(24, 6, 6, 10);
 
 -- --------------------------------------------------------
 
@@ -365,12 +422,12 @@ ALTER TABLE `Usuario`
 -- AUTO_INCREMENT de la tabla `DetalleFactura`
 --
 ALTER TABLE `DetalleFactura`
-  MODIFY `Id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
+  MODIFY `Id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=111;
 --
 -- AUTO_INCREMENT de la tabla `Factura`
 --
 ALTER TABLE `Factura`
-  MODIFY `Id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `Id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
 --
 -- AUTO_INCREMENT de la tabla `Insumo`
 --
@@ -390,7 +447,7 @@ ALTER TABLE `Producto`
 -- AUTO_INCREMENT de la tabla `Receta`
 --
 ALTER TABLE `Receta`
-  MODIFY `Id_receta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `Id_receta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 --
 -- AUTO_INCREMENT de la tabla `Usuario`
 --
