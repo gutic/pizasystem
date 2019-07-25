@@ -63,6 +63,9 @@
 							<li>
 								<a href="movimientos.php">Movimientos</a>
 							</li>
+							<li>
+								<a href="ManualUsuario.html">Manual del usuario</a>
+							</li>
 					</ul>
 			</div>
 			<!-- /#sidebar-wrapper -->
